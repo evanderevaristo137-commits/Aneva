@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-05T02:47:45.919Z",
+  "updatedAt": "2026-07-05T02:56:23.675Z",
   "items": [
     {
       "id": "usdaoa",
@@ -112,14 +112,59 @@
         "pt": "Brent",
         "en": "Brent"
       },
-      "value": 79.1,
-      "dec": 1,
+      "value": 72.13,
+      "dec": 2,
       "pre": "USD ",
       "suf": "",
-      "chg": 1.3,
+      "chg": -1.39,
+      "chgType": "pct",
+      "dir": "down",
+      "src": "commodity"
+    },
+    {
+      "id": "wti",
+      "label": {
+        "pt": "WTI",
+        "en": "WTI"
+      },
+      "value": 68.78,
+      "dec": 2,
+      "pre": "USD ",
+      "suf": "",
+      "chg": -2.78,
+      "chgType": "pct",
+      "dir": "down",
+      "src": "commodity"
+    },
+    {
+      "id": "gold",
+      "label": {
+        "pt": "Ouro",
+        "en": "Gold"
+      },
+      "value": 4187.3,
+      "dec": 0,
+      "pre": "USD ",
+      "suf": "",
+      "chg": 4.1,
       "chgType": "pct",
       "dir": "up",
-      "src": "manual"
+      "src": "commodity"
+    },
+    {
+      "id": "natgas",
+      "label": {
+        "pt": "Gás Natural",
+        "en": "Natural Gas"
+      },
+      "value": 3.25,
+      "dec": 2,
+      "pre": "USD ",
+      "suf": "",
+      "chg": 2.01,
+      "chgType": "pct",
+      "dir": "up",
+      "src": "commodity"
     },
     {
       "id": "bodiva",
@@ -139,6 +184,7 @@
   ],
   "log": [
     "câmbio: ok (API de mercado)",
+    "commodities: 4/4 atualizadas (Yahoo)",
     "BNA: sem dados (definir BNA_URL) — valor manual mantido",
     "BODIVA: sem dados (definir BODIVA_URL) — valor manual mantido"
   ]

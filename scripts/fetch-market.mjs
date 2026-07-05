@@ -20,7 +20,18 @@ import { readFile, writeFile } from "node:fs/promises";
 const FILE = new URL("../assets/data/market.json", import.meta.url);
 const UA =
   "Mozilla/5.0 (compatible; AnevaMarketBot/1.0; +https://aneva.co.ao)";
+// UA de navegador para fontes que rejeitam bots (ex.: Yahoo Finance)
+const UA_BROWSER =
+  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122 Safari/537.36";
 const FX_URL = "https://open.er-api.com/v6/latest/USD";
+
+// Commodities (Yahoo Finance, gratuito e sem chave). id → símbolo Yahoo.
+const COMMODITIES = [
+  { id: "brent", sym: "BZ=F" },
+  { id: "wti", sym: "CL=F" },
+  { id: "gold", sym: "GC=F" },
+  { id: "natgas", sym: "NG=F" },
+];
 
 /* ---------- utilidades ---------- */
 async function loadCurrent() {
@@ -86,6 +97,26 @@ async function fetchFx() {
   };
 }
 
+// Preço de uma commodity via Yahoo Finance. Devolve { price, chg } ou null.
+async function fetchCommodity(sym) {
+  const url =
+    "https://query1.finance.yahoo.com/v8/finance/chart/" +
+    encodeURIComponent(sym) +
+    "?interval=1d&range=5d";
+  const res = await fetch(url, { headers: { "User-Agent": UA_BROWSER } });
+  if (!res.ok) return null;
+  const j = await res.json();
+  const m = j && j.chart && j.chart.result && j.chart.result[0] && j.chart.result[0].meta;
+  if (!m || typeof m.regularMarketPrice !== "number") return null;
+  const price = m.regularMarketPrice;
+  const prev = typeof m.chartPreviousClose === "number" ? m.chartPreviousClose : m.previousClose;
+  let chg = null;
+  if (typeof prev === "number" && prev > 0) {
+    chg = Math.round(((price - prev) / prev) * 100 * 100) / 100;
+  }
+  return { price, chg };
+}
+
 // BNA — melhor-esforço. Só corre se BNA_URL estiver definida.
 async function fetchBna() {
   const url = process.env.BNA_URL;
@@ -143,6 +174,31 @@ async function main() {
   } catch (e) {
     notes.push("câmbio: FALHOU (" + e.message + ") — mantidos valores anteriores");
   }
+
+  // 1b) Commodities (petróleo, ouro, gás) via Yahoo Finance
+  let okCommodities = 0;
+  for (const c of COMMODITIES) {
+    const item = byId(items, c.id);
+    if (!item) continue;
+    try {
+      const q = await fetchCommodity(c.sym);
+      if (q && q.price != null) {
+        item.value = Math.round(q.price * 100) / 100;
+        if (q.chg != null) {
+          item.chg = q.chg;
+          item.chgType = "pct";
+          item.dir = q.chg > 0 ? "up" : q.chg < 0 ? "down" : "flat";
+        }
+        item.src = "commodity";
+        okCommodities++;
+      }
+    } catch { /* mantém valor anterior */ }
+  }
+  notes.push(
+    okCommodities
+      ? `commodities: ${okCommodities}/${COMMODITIES.length} atualizadas (Yahoo)`
+      : "commodities: FALHOU — mantidos valores anteriores"
+  );
 
   // 2) BNA — melhor-esforço (sobrepõe o câmbio se a taxa oficial for lida)
   try {
