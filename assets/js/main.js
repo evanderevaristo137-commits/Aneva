@@ -436,7 +436,10 @@
       { label: { pt: "Inflação", en: "Inflation" }, value: 22.3, dec: 1, suf: "%", chg: -1.1, chgType: "pp", dir: "good" },
       { label: { pt: "Taxa Diretora BNA", en: "BNA Policy Rate" }, value: 18.0, dec: 2, suf: "%", chg: 0, chgType: "pp", dir: "flat" },
       { label: { pt: "LUIBOR 3M", en: "LUIBOR 3M" }, value: 16.4, dec: 1, suf: "%", chg: -0.2, chgType: "abs", dir: "good" },
-      { label: { pt: "Brent", en: "Brent" }, value: 79.1, dec: 1, pre: "USD ", chg: 1.3, chgType: "pct", dir: "up" },
+      { label: { pt: "Brent", en: "Brent" }, value: 72.13, dec: 2, pre: "USD ", chg: -1.4, chgType: "pct", dir: "down" },
+      { label: { pt: "WTI", en: "WTI" }, value: 68.78, dec: 2, pre: "USD ", chg: -2.8, chgType: "pct", dir: "down" },
+      { label: { pt: "Ouro", en: "Gold" }, value: 4187, dec: 0, pre: "USD ", chg: 4.1, chgType: "pct", dir: "up" },
+      { label: { pt: "Gás Natural", en: "Natural Gas" }, value: 3.25, dec: 2, pre: "USD ", chg: 2.0, chgType: "pct", dir: "up" },
       { label: { pt: "BODIVA · Dívida Pública", en: "BODIVA · Public Debt" }, value: 1284, dec: 0, chg: 0.9, chgType: "pct", dir: "up" }
     ]
   };
