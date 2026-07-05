@@ -1,0 +1,48 @@
+name: Atualizar dados de mercado
+
+on:
+  schedule:
+    # 06:00 UTC (07:00 em Luanda) de segunda a sexta-feira
+    - cron: "0 6 * * 1-5"
+  workflow_dispatch:
+
+# Necessário para o bot poder fazer commit do ficheiro atualizado
+permissions:
+  contents: write
+
+concurrency:
+  group: market-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Recolher indicadores de mercado
+        env:
+          # Opcionais — definir em Settings › Secrets and variables › Actions › Variables
+          # para ativar a leitura (melhor-esforço) do BNA e da BODIVA.
+          BNA_URL: ${{ vars.BNA_URL }}
+          BODIVA_URL: ${{ vars.BODIVA_URL }}
+          BODIVA_PATTERN: ${{ vars.BODIVA_PATTERN }}
+        run: node scripts/fetch-market.mjs
+
+      - name: Fazer commit se houver alterações
+        run: |
+          git config user.name "aneva-market-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/market.json
+          if git diff --cached --quiet; then
+            echo "Sem alterações nos indicadores."
+          else
+            git commit -m "chore(dados): atualizar indicadores de mercado [skip ci]"
+            git push
+          fi

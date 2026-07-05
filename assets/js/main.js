@@ -53,7 +53,7 @@
       "hero.trust": "A confiança de empresários em toda Angola",
       "hero.panel.title": "Desempenho consolidado", "hero.panel.m1": "Rentabilidade", "hero.panel.m2": "Liquidez", "hero.panel.m3": "Eficiência",
       "stat.companies": "Empresas apoiadas", "stat.satisfaction": "Clientes satisfeitos", "stat.volume": "USD em operações acompanhadas", "stat.years": "Anos de experiência",
-      "intel.tag": "Centro de Inteligência",
+      "intel.tag": "Centro de Inteligência", "intel.updated": "Atualizado",
       "dash.eyebrow": "Painel de Inteligência Financeira", "dash.title": "Veja as suas finanças com clareza absoluta",
       "dash.lead": "Transformamos dados dispersos em indicadores vivos que orientam cada decisão. Uma amostra ilustrativa da inteligência que entregamos aos nossos clientes.",
       "dash.live": "Demonstração ilustrativa", "dash.tab1": "Crescimento", "dash.tab2": "Fluxo de Caixa", "dash.tab3": "Rentabilidade",
@@ -175,7 +175,7 @@
       "hero.trust": "Trusted by entrepreneurs across Angola",
       "hero.panel.title": "Consolidated performance", "hero.panel.m1": "Profitability", "hero.panel.m2": "Liquidity", "hero.panel.m3": "Efficiency",
       "stat.companies": "Companies supported", "stat.satisfaction": "Satisfied clients", "stat.volume": "USD in operations advised", "stat.years": "Years of experience",
-      "intel.tag": "Intelligence Center",
+      "intel.tag": "Intelligence Center", "intel.updated": "Updated",
       "dash.eyebrow": "Financial Intelligence Panel", "dash.title": "See your finances with absolute clarity",
       "dash.lead": "We turn scattered data into living indicators that guide every decision. An illustrative sample of the intelligence we deliver to our clients.",
       "dash.live": "Illustrative demo", "dash.tab1": "Growth", "dash.tab2": "Cash Flow", "dash.tab3": "Profitability",
@@ -427,18 +427,60 @@
   /* ---------------------------------------------------------
      2. TICKER (Financial Intelligence Center — illustrative)
      --------------------------------------------------------- */
+  // Fallback usado se assets/data/market.json não carregar (valores ilustrativos).
+  const DEFAULT_MARKET = {
+    updatedAt: null,
+    items: [
+      { label: { pt: "USD/AOA", en: "USD/AOA" }, value: 925.02, dec: 2, chg: 0.4, chgType: "pct", dir: "bad" },
+      { label: { pt: "EUR/AOA", en: "EUR/AOA" }, value: 1058.07, dec: 2, chg: 0.2, chgType: "pct", dir: "bad" },
+      { label: { pt: "Inflação", en: "Inflation" }, value: 22.3, dec: 1, suf: "%", chg: -1.1, chgType: "pp", dir: "good" },
+      { label: { pt: "Taxa Diretora BNA", en: "BNA Policy Rate" }, value: 18.0, dec: 2, suf: "%", chg: 0, chgType: "pp", dir: "flat" },
+      { label: { pt: "LUIBOR 3M", en: "LUIBOR 3M" }, value: 16.4, dec: 1, suf: "%", chg: -0.2, chgType: "abs", dir: "good" },
+      { label: { pt: "Brent", en: "Brent" }, value: 79.1, dec: 1, pre: "USD ", chg: 1.3, chgType: "pct", dir: "up" },
+      { label: { pt: "BODIVA · Dívida Pública", en: "BODIVA · Public Debt" }, value: 1284, dec: 0, chg: 0.9, chgType: "pct", dir: "up" }
+    ]
+  };
+  let market = DEFAULT_MARKET;
+
+  function fmtNum(v, dec) {
+    return Number(v).toLocaleString(lang === "en" ? "en-US" : "pt-PT", { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
+  }
+  function chgHtml(it) {
+    if (it.chg == null || it.chg === 0) return "";
+    const arrow = it.chg > 0 ? "▲" : it.chg < 0 ? "▼" : "•";
+    const cls = (it.dir === "good" || it.dir === "up") ? "up" : (it.dir === "bad" || it.dir === "down") ? "down" : "flat";
+    const a = Math.abs(it.chg);
+    let s;
+    if (it.chgType === "pct") s = fmtNum(a, 1) + "%";
+    else if (it.chgType === "pp") s = fmtNum(a, 1) + " p.p.";
+    else s = fmtNum(a, a < 10 ? 1 : 0);
+    const sign = it.chg > 0 ? "+" : it.chg < 0 ? "-" : "";
+    return `<span class="chg ${cls}">${arrow} ${sign}${s}</span>`;
+  }
+  function updateIntelStamp() {
+    const el = $("#intelUpd"); if (!el) return;
+    if (!market.updatedAt) { el.textContent = ""; return; }
+    const d = new Date(market.updatedAt);
+    const df = new Intl.DateTimeFormat(lang === "en" ? "en-GB" : "pt-PT", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(d);
+    el.innerHTML = `<span class="dotb"></span>${t("intel.updated")} ${df}`;
+  }
   function renderTicker() {
-    const data = [
-      { k: { pt: "USD/AOA", en: "USD/AOA" }, v: "912,50", c: "+0,4%", up: false },
-      { k: { pt: "EUR/AOA", en: "EUR/AOA" }, v: "988,20", c: "+0,2%", up: false },
-      { k: { pt: "Inflação", en: "Inflation" }, v: "22,3%", c: "-1,1 p.p.", up: true },
-      { k: { pt: "Taxa Diretora BNA", en: "BNA Policy Rate" }, v: "18,00%", c: "0,0", up: true },
-      { k: { pt: "LUIBOR 3M", en: "LUIBOR 3M" }, v: "16,4%", c: "-0,2", up: true },
-      { k: { pt: "Brent", en: "Brent" }, v: "USD 79,1", c: "+1,3%", up: true },
-      { k: { pt: "Bolsa BODIVA", en: "BODIVA Index" }, v: "1.284", c: "+0,9%", up: true }
-    ];
-    const one = data.map((d) => `<span class="tick"><span class="k">${d.k[lang] || d.k.pt}</span><span class="v">${d.v}</span><span class="chg ${d.up ? "up" : "down"}">${d.c}</span></span>`).join("");
+    const items = market.items || [];
+    const one = items.map((it) => {
+      const label = (it.label && (it.label[lang] || it.label.pt)) || "";
+      const val = (it.pre || "") + fmtNum(it.value, it.dec || 0) + (it.suf || "");
+      return `<span class="tick"><span class="k">${label}</span><span class="v">${val}</span>${chgHtml(it)}</span>`;
+    }).join("");
     $("#ticker").innerHTML = one + one;
+    updateIntelStamp();
+  }
+  async function initMarket() {
+    try {
+      const res = await fetch("assets/data/market.json", { cache: "no-cache" });
+      if (!res.ok) return;
+      const j = await res.json();
+      if (j && Array.isArray(j.items) && j.items.length) { market = j; renderTicker(); }
+    } catch (e) { /* mantém o fallback ilustrativo */ }
   }
 
   /* ---------------------------------------------------------
@@ -799,7 +841,7 @@
     renderBlog(); renderResources(); renderFaq(); renderTicker();
     renderSimMenu(); renderSimPanel();
     initTheme(); initLang(); initHeader(); initDrawer(); initForms();
-    initReveal(); initCounters(); initDash();
+    initReveal(); initCounters(); initDash(); initMarket();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();

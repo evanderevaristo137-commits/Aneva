@@ -377,7 +377,10 @@ ul { margin: 0; padding: 0; list-style: none; }
 .tick .k { color: #9fb0c9; }
 .tick .v { font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
 .tick .chg { font-size: .82rem; font-weight: 700; }
-.chg.up { color: #6ee7a8; } .chg.down { color: #ff9b86; }
+.chg.up { color: #6ee7a8; } .chg.down { color: #ff9b86; } .chg.flat { color: #9fb0c9; }
+.intel__upd { flex: none; font-size: .72rem; color: #7f8ea3; white-space: nowrap; letter-spacing: .02em; }
+.intel__upd .dotb { display:inline-block; width:5px; height:5px; border-radius:50%; background:#c0a265; margin-right:6px; vertical-align:middle; }
+@media (max-width: 720px) { .intel__upd { display: none; } }
 
 /* =============================================================
    DASHBOARD SECTION
