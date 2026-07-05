@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aneva.co.ao/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://aneva.co.ao/#servicos</loc><priority>0.9</priority></url>
+  <url><loc>https://aneva.co.ao/#sobre</loc><priority>0.8</priority></url>
+  <url><loc>https://aneva.co.ao/#simuladores</loc><priority>0.8</priority></url>
+  <url><loc>https://aneva.co.ao/#casos</loc><priority>0.7</priority></url>
+  <url><loc>https://aneva.co.ao/#blog</loc><priority>0.7</priority></url>
+  <url><loc>https://aneva.co.ao/#contacto</loc><priority>0.9</priority></url>
+</urlset>
