@@ -7,6 +7,11 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Safe storage — alguns contextos (modo privado, iframes sandbox) bloqueiam localStorage.
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* ignora */ } }
+  };
 
   /* ---------------------------------------------------------
      0. DATA  (bilingual)
@@ -281,7 +286,7 @@
     }
   };
 
-  let lang = localStorage.getItem("aneva-lang") || "pt";
+  let lang = store.get("aneva-lang") || "pt";
   const t = (k) => (I18N[lang] && I18N[lang][k]) || (I18N.pt[k]) || k;
 
   /* ---------------------------------------------------------
@@ -795,7 +800,7 @@
   }
 
   function initTheme() {
-    const saved = localStorage.getItem("aneva-theme");
+    const saved = store.get("aneva-theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const theme = saved || (prefersDark ? "dark" : "light");
     document.documentElement.setAttribute("data-theme", theme);
@@ -803,7 +808,7 @@
       const cur = document.documentElement.getAttribute("data-theme");
       const next = cur === "dark" ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("aneva-theme", next);
+      store.set("aneva-theme", next);
       $('meta[name="theme-color"]').setAttribute("content", next === "dark" ? "#060f20" : "#0b1f3a");
     });
   }
@@ -812,7 +817,7 @@
     applyI18n();
     $("#langBtn").addEventListener("click", () => {
       lang = lang === "pt" ? "en" : "pt";
-      localStorage.setItem("aneva-lang", lang);
+      store.set("aneva-lang", lang);
       rerenderDynamic();
     });
   }
