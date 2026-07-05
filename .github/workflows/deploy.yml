@@ -5,7 +5,6 @@ on:
     branches:
       - main
       - master
-      - claude/aneva-website-design-fat472
   workflow_dispatch:
 
 # Permissions needed to deploy to GitHub Pages
