@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-08T11:59:31.551Z",
+  "updatedAt": "2026-07-09T16:13:23.934Z",
   "items": [
     {
       "id": "usdaoa",
@@ -11,9 +11,9 @@
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.03,
+      "chg": 0,
       "chgType": "pct",
-      "dir": "bad",
+      "dir": "flat",
       "src": "auto"
     },
     {
@@ -22,11 +22,11 @@
         "pt": "EUR/AOA",
         "en": "EUR/AOA"
       },
-      "value": 1056.23,
+      "value": 1055.83,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.1,
+      "chg": -0.04,
       "chgType": "pct",
       "dir": "good",
       "src": "auto"
@@ -37,13 +37,13 @@
         "pt": "GBP/AOA",
         "en": "GBP/AOA"
       },
-      "value": 1236.22,
+      "value": 1237.12,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.01,
+      "chg": 0.07,
       "chgType": "pct",
-      "dir": "good",
+      "dir": "bad",
       "src": "auto"
     },
     {
@@ -52,11 +52,11 @@
         "pt": "ZAR/AOA",
         "en": "ZAR/AOA"
       },
-      "value": 56.83,
+      "value": 56.38,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.35,
+      "chg": -0.79,
       "chgType": "pct",
       "dir": "good",
       "src": "auto"
