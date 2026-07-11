@@ -1,0 +1,65 @@
+# CI/CD da plataforma AngoStay (monorepo em angostay/)
+name: AngoStay CI
+
+on:
+  push:
+    branches: [main]
+    paths: ['angostay/**', '.github/workflows/angostay-ci.yml']
+  pull_request:
+    paths: ['angostay/**', '.github/workflows/angostay-ci.yml']
+
+jobs:
+  api:
+    name: API — lint, testes e build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: angostay/apps/api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Instalar dependências
+        run: npm install
+      - name: Gerar Prisma Client
+        run: npx prisma generate
+      - name: Testes (Jest)
+        run: npm test
+      - name: Build
+        run: npm run build
+
+  web:
+    name: Web — build Next.js
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: angostay/apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Instalar dependências
+        run: npm install
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+
+  docker:
+    name: Docker — validar imagens
+    runs-on: ubuntu-latest
+    needs: [api, web]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build imagem API
+        run: docker build angostay/apps/api -t angostay-api:${{ github.sha }}
+      - name: Build imagem Web
+        run: docker build angostay/apps/web -t angostay-web:${{ github.sha }}
+
+  # Deploy contínuo:
+  # - Web: projeto Vercel ligado ao repositório (root angostay/apps/web)
+  # - API: Railway/AWS ligado ao Dockerfile (root angostay/apps/api),
+  #   com `npx prisma migrate deploy` como release command.

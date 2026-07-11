@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tokens de tema — ver docs/04-design-system.md */
+:root {
+  --background: 248 250 252; /* #F8FAFC */
+  --surface: 255 255 255;
+  --ink: 15 23 42; /* #0F172A */
+  --muted: 100 116 139;
+  --line: 226 232 240;
+}
+
+.dark {
+  --background: 6 13 26; /* #060D1A */
+  --surface: 11 21 38; /* #0B1526 */
+  --ink: 226 232 240;
+  --muted: 148 163 184;
+  --line: 30 41 59;
+}
+
+body {
+  @apply bg-background text-ink antialiased;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-page px-4 sm:px-6;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-accent-500 text-white hover:bg-accent-600;
+  }
+  .btn-secondary {
+    @apply btn bg-brand-900 text-white hover:bg-brand-700 dark:bg-brand-100 dark:text-brand-900 dark:hover:bg-white;
+  }
+  .btn-ghost {
+    @apply btn border border-line bg-surface text-ink hover:border-accent-500;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-surface shadow-card;
+  }
+  .input {
+    @apply w-full rounded-xl border border-line bg-surface px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/30;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink;
+  }
+  .badge-verified {
+    @apply inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300;
+  }
+}
