@@ -1,0 +1,602 @@
+// AngoStay — Modelo de dados (PostgreSQL)
+// Valores monetários em centavos de Kwanza (Int) — nunca float.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────── Identidade e RBAC ───────────────────────────
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  DELETED
+}
+
+enum AuthProvider {
+  LOCAL
+  GOOGLE
+  FACEBOOK
+}
+
+model User {
+  id              String     @id @default(cuid())
+  name            String
+  email           String     @unique
+  phone           String?
+  passwordHash    String?
+  avatarUrl       String?
+  bio             String?
+  locale          String     @default("pt")
+  status          UserStatus @default(ACTIVE)
+  emailVerifiedAt DateTime?
+  phoneVerifiedAt DateTime?
+  authProvider    AuthProvider @default(LOCAL)
+  providerId      String?
+  twoFactorSecret String? // cifrado (AES-256-GCM)
+  twoFactorEnabled Boolean   @default(false)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  deletedAt       DateTime?
+
+  roles                 UserRole[]
+  properties            Property[]             @relation("HostProperties")
+  reservations          Reservation[]          @relation("GuestReservations")
+  favorites             Favorite[]
+  reviews               Review[]
+  sentMessages          Message[]
+  guestConversations    Conversation[]         @relation("GuestConversations")
+  hostConversations     Conversation[]         @relation("HostConversations")
+  notifications         Notification[]
+  identityVerifications IdentityVerification[]
+  reports               Report[]
+  couponRedemptions     CouponRedemption[]
+  auditLogs             AuditLog[]
+  refreshTokens         RefreshToken[]
+
+  @@index([status])
+  @@map("users")
+}
+
+model Role {
+  id          String           @id @default(cuid())
+  name        String           @unique // GUEST | HOST | ADMIN | MODERATOR
+  description String?
+  users       UserRole[]
+  permissions RolePermission[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id    String           @id @default(cuid())
+  code  String           @unique // ex.: property.moderate, payment.refund
+  roles RolePermission[]
+
+  @@map("permissions")
+}
+
+model UserRole {
+  userId String
+  roleId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+  @@map("user_roles")
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model RefreshToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  family    String // rotação + deteção de reuso
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, family])
+  @@map("refresh_tokens")
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model IdentityVerification {
+  id             String             @id @default(cuid())
+  userId         String
+  docType        String // BI | PASSAPORTE
+  docNumberEnc   String // cifrado a nível de coluna
+  docPhotoUrl    String
+  selfieUrl      String
+  status         VerificationStatus @default(PENDING)
+  reviewedById   String?
+  reviewNotes    String?
+  createdAt      DateTime           @default(now())
+  reviewedAt     DateTime?
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@map("identity_verifications")
+}
+
+// ─────────────────────────── Localização ───────────────────────────
+
+model Country {
+  id        String     @id @default(cuid())
+  code      String     @unique // AO
+  name      String
+  currency  String     @default("AOA")
+  provinces Province[]
+
+  @@map("countries")
+}
+
+model Province {
+  id        String  @id @default(cuid())
+  name      String
+  countryId String
+  country   Country @relation(fields: [countryId], references: [id])
+  cities    City[]
+
+  @@unique([countryId, name])
+  @@map("provinces")
+}
+
+model City {
+  id         String     @id @default(cuid())
+  name       String
+  slug       String     @unique
+  provinceId String
+  lat        Float?
+  lng        Float?
+  province   Province   @relation(fields: [provinceId], references: [id])
+  properties Property[]
+
+  @@map("cities")
+}
+
+// ─────────────────────────── Catálogo ───────────────────────────
+
+enum PropertyType {
+  APARTMENT
+  HOUSE
+  ROOM
+  GUEST_HOUSE
+  PENSION
+  APART_HOTEL
+  HOTEL
+}
+
+enum PropertyStatus {
+  DRAFT
+  PENDING_REVIEW
+  ACTIVE
+  SUSPENDED
+}
+
+enum CancellationPolicy {
+  FLEXIBLE // reembolso total até 24h antes
+  MODERATE // total até 5 dias antes; 50% depois
+  STRICT // 50% até 7 dias antes; 0% depois
+}
+
+model Property {
+  id                 String             @id @default(cuid())
+  hostId             String
+  cityId             String
+  slug               String             @unique
+  type               PropertyType
+  title              String
+  description        String
+  address            String
+  lat                Float
+  lng                Float
+  maxGuests          Int
+  bedrooms           Int
+  beds               Int
+  bathrooms          Int
+  basePriceKz        Int // centavos/noite
+  cleaningFeeKz      Int                @default(0)
+  currency           String             @default("AOA")
+  cancellationPolicy CancellationPolicy @default(MODERATE)
+  houseRules         String?
+  status             PropertyStatus     @default(DRAFT)
+  verifiedAt         DateTime?
+  ratingAvg          Float              @default(0)
+  ratingCount        Int                @default(0)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  deletedAt          DateTime?
+
+  host          User                   @relation("HostProperties", fields: [hostId], references: [id])
+  city          City                   @relation(fields: [cityId], references: [id])
+  photos        Photo[]
+  amenities     PropertyAmenity[]
+  reservations  Reservation[]
+  favorites     Favorite[]
+  reviews       Review[]
+  blocks        AvailabilityBlock[]
+  verifications PropertyVerification[]
+  conversations Conversation[]
+
+  @@index([cityId, status])
+  @@index([basePriceKz])
+  @@index([lat, lng])
+  @@map("properties")
+}
+
+model Photo {
+  id         String   @id @default(cuid())
+  propertyId String
+  url        String
+  alt        String?
+  position   Int      @default(0)
+  isCover    Boolean  @default(false)
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@index([propertyId])
+  @@map("photos")
+}
+
+model Amenity {
+  id         String            @id @default(cuid())
+  code       String            @unique // wifi, generator, water_tank, ac, pool...
+  namePt     String
+  nameEn     String
+  nameFr     String
+  icon       String?
+  properties PropertyAmenity[]
+
+  @@map("amenities")
+}
+
+model PropertyAmenity {
+  propertyId String
+  amenityId  String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  amenity    Amenity  @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+
+  @@id([propertyId, amenityId])
+  @@map("property_amenities")
+}
+
+model AvailabilityBlock {
+  id         String   @id @default(cuid())
+  propertyId String
+  startDate  DateTime @db.Date
+  endDate    DateTime @db.Date
+  reason     String?
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@index([propertyId, startDate, endDate])
+  @@map("availability_blocks")
+}
+
+model PropertyVerification {
+  id           String             @id @default(cuid())
+  propertyId   String
+  documentUrl  String // título/contrato de arrendamento
+  status       VerificationStatus @default(PENDING)
+  reviewedById String?
+  reviewNotes  String?
+  createdAt    DateTime           @default(now())
+  reviewedAt   DateTime?
+  property     Property           @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@map("property_verifications")
+}
+
+// ─────────────────────────── Reservas ───────────────────────────
+
+enum ReservationStatus {
+  PENDING // aguarda pagamento (TTL 30 min)
+  CONFIRMED
+  CHECKED_IN
+  COMPLETED
+  CANCELLED
+  EXPIRED
+}
+
+model Reservation {
+  id             String            @id @default(cuid())
+  code           String            @unique // AS-XXXXXX
+  guestId        String
+  propertyId     String
+  checkIn        DateTime          @db.Date
+  checkOut       DateTime          @db.Date
+  guests         Int
+  nights         Int
+  nightlyPriceKz Int
+  cleaningFeeKz  Int               @default(0)
+  serviceFeeKz   Int // comissão do hóspede
+  discountKz     Int               @default(0)
+  totalKz        Int
+  status         ReservationStatus @default(PENDING)
+  qrCodeToken    String            @unique @default(cuid()) // check-in por QR
+  cancelReason   String?
+  expiresAt      DateTime? // deadline de pagamento
+  checkedInAt    DateTime?
+  cancelledAt    DateTime?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  guest      User               @relation("GuestReservations", fields: [guestId], references: [id])
+  property   Property           @relation(fields: [propertyId], references: [id])
+  payments   Payment[]
+  review     Review?
+  redemption CouponRedemption?
+
+  // Anti-overbooking reforçado por EXCLUSION CONSTRAINT (ver prisma/sql/exclusion-constraint.sql)
+  @@index([propertyId, checkIn, checkOut])
+  @@index([guestId, status])
+  @@map("reservations")
+}
+
+// ─────────────────────────── Pagamentos ───────────────────────────
+
+enum PaymentMethod {
+  MULTICAIXA_EXPRESS
+  UNITEL_MONEY
+  AFRIMONEY
+  VISA
+  MASTERCARD
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  reservationId String
+  method        PaymentMethod
+  provider      String // adaptador usado
+  providerRef   String?       @unique // idempotência de webhooks
+  amountKz      Int
+  feeKz         Int           @default(0) // taxa do gateway
+  status        PaymentStatus @default(PENDING)
+  paidAt        DateTime?
+  refundedAt    DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  reservation  Reservation   @relation(fields: [reservationId], references: [id])
+  transactions Transaction[]
+
+  @@index([reservationId, status])
+  @@map("payments")
+}
+
+enum TransactionType {
+  CHARGE // cobrança ao hóspede
+  COMMISSION // comissão AngoStay
+  PAYOUT // repasse ao anfitrião
+  REFUND
+  CASHBACK
+}
+
+// Ledger imutável — nunca UPDATE/DELETE.
+model Transaction {
+  id        String          @id @default(cuid())
+  paymentId String
+  type      TransactionType
+  amountKz  Int // positivo = crédito à plataforma
+  memo      String?
+  createdAt DateTime        @default(now())
+  payment   Payment         @relation(fields: [paymentId], references: [id])
+
+  @@index([paymentId])
+  @@map("transactions")
+}
+
+// ─────────────────────────── Cupões ───────────────────────────
+
+enum CouponType {
+  PERCENT
+  FIXED
+}
+
+model Coupon {
+  id          String             @id @default(cuid())
+  code        String             @unique
+  type        CouponType
+  value       Int // percent (1–100) ou centavos
+  minTotalKz  Int                @default(0)
+  maxUses     Int?
+  usedCount   Int                @default(0)
+  perUserMax  Int                @default(1)
+  validFrom   DateTime
+  validTo     DateTime
+  active      Boolean            @default(true)
+  createdAt   DateTime           @default(now())
+  redemptions CouponRedemption[]
+
+  @@map("coupons")
+}
+
+model CouponRedemption {
+  id            String      @id @default(cuid())
+  couponId      String
+  userId        String
+  reservationId String      @unique
+  discountKz    Int
+  createdAt     DateTime    @default(now())
+  coupon        Coupon      @relation(fields: [couponId], references: [id])
+  user          User        @relation(fields: [userId], references: [id])
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+
+  @@index([couponId, userId])
+  @@map("coupon_redemptions")
+}
+
+// ─────────────────────────── Social ───────────────────────────
+
+model Review {
+  id            String      @id @default(cuid())
+  reservationId String      @unique // só quem ficou avalia, uma vez
+  propertyId    String
+  authorId      String
+  rating        Int // 1–5
+  cleanliness   Int?
+  location      Int?
+  value         Int?
+  comment       String
+  hostReply     String?
+  createdAt     DateTime    @default(now())
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+  property      Property    @relation(fields: [propertyId], references: [id])
+  author        User        @relation(fields: [authorId], references: [id])
+
+  @@index([propertyId])
+  @@map("reviews")
+}
+
+model Favorite {
+  userId     String
+  propertyId String
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@id([userId, propertyId])
+  @@map("favorites")
+}
+
+model Conversation {
+  id         String    @id @default(cuid())
+  guestId    String
+  hostId     String
+  propertyId String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  guest      User      @relation("GuestConversations", fields: [guestId], references: [id])
+  host       User      @relation("HostConversations", fields: [hostId], references: [id])
+  property   Property  @relation(fields: [propertyId], references: [id])
+  messages   Message[]
+
+  @@unique([guestId, hostId, propertyId])
+  @@map("conversations")
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  senderId       String
+  body           String
+  readAt         DateTime?
+  createdAt      DateTime     @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         User         @relation(fields: [senderId], references: [id])
+
+  @@index([conversationId, createdAt])
+  @@map("messages")
+}
+
+// ─────────────────────────── Notificações / Moderação / Auditoria ───────────────────────────
+
+enum NotificationChannel {
+  EMAIL
+  SMS
+  WHATSAPP
+  PUSH
+  IN_APP
+}
+
+enum NotificationStatus {
+  QUEUED
+  SENT
+  FAILED
+  READ
+}
+
+model Notification {
+  id        String              @id @default(cuid())
+  userId    String
+  channel   NotificationChannel
+  template  String // reservation_confirmed, payment_received...
+  payload   Json
+  status    NotificationStatus  @default(QUEUED)
+  sentAt    DateTime?
+  readAt    DateTime?
+  createdAt DateTime            @default(now())
+  user      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@map("notifications")
+}
+
+enum ReportTargetType {
+  PROPERTY
+  USER
+  REVIEW
+  MESSAGE
+}
+
+enum ReportStatus {
+  OPEN
+  IN_REVIEW
+  RESOLVED
+  DISMISSED
+}
+
+model Report {
+  id         String           @id @default(cuid())
+  reporterId String
+  targetType ReportTargetType
+  targetId   String
+  reason     String
+  details    String?
+  status     ReportStatus     @default(OPEN)
+  resolvedById String?
+  resolution String?
+  createdAt  DateTime         @default(now())
+  resolvedAt DateTime?
+  reporter   User             @relation(fields: [reporterId], references: [id])
+
+  @@index([status, targetType])
+  @@map("reports")
+}
+
+// Trilha de auditoria imutável.
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  action    String // ex.: reservation.cancel, admin.user.suspend
+  entity    String
+  entityId  String?
+  before    Json?
+  after     Json?
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  actor     User?    @relation(fields: [actorId], references: [id])
+
+  @@index([entity, entityId])
+  @@index([actorId, createdAt])
+  @@map("audit_logs")
+}
