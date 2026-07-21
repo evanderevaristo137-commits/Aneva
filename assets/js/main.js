@@ -368,8 +368,8 @@
     { n: 4, ic: "cashflow", min: 4 }, { n: 5, ic: "build", min: 8 }, { n: 6, ic: "bi", min: 6 }
   ];
   const gradients = [
-    ["#0b1f3a", "#274a80"], ["#12294a", "#a9863f"], ["#1b3660", "#0b1f3a"],
-    ["#274a80", "#12294a"], ["#0b1f3a", "#a9863f"], ["#12294a", "#1b3660"]
+    ["#064e3b", "#059669"], ["#065f46", "#a6854a"], ["#047857", "#064e3b"],
+    ["#059669", "#065f46"], ["#064e3b", "#a6854a"], ["#065f46", "#047857"]
   ];
   function renderBlog() {
     $("#blogGrid").innerHTML = blog.map((b, i) => {
@@ -380,7 +380,7 @@
           <span class="post__cat" data-i18n="blog.${b.n}.c">${t("blog." + b.n + ".c")}</span>
           <div class="g" style="background:linear-gradient(135deg,${g1},${g2})">
             <svg viewBox="0 0 320 180" preserveAspectRatio="none" style="width:100%;height:100%;opacity:.35">
-              <path d="M0 140 L40 120 L80 128 L120 96 L160 104 L200 70 L240 84 L280 50 L320 40" fill="none" stroke="#d8bd82" stroke-width="2.5"/>
+              <path d="M0 140 L40 120 L80 128 L120 96 L160 104 L200 70 L240 84 L280 50 L320 40" fill="none" stroke="#e6cd9c" stroke-width="2.5"/>
               <path d="M0 140 L40 120 L80 128 L120 96 L160 104 L200 70 L240 84 L280 50 L320 40 L320 180 L0 180Z" fill="#ffffff" opacity=".08"/>
             </svg>
           </div>
@@ -528,7 +528,7 @@
     const lineEl = $("#chartLine"), fillEl = $("#chartFill"), dots = $("#chartDots");
     lineEl.setAttribute("d", line);
     fillEl.setAttribute("d", fill);
-    dots.innerHTML = pts.map((p, i) => i === pts.length - 1 ? `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="5" fill="#c0a265" stroke="var(--surface)" stroke-width="2.5"/>` : "").join("");
+    dots.innerHTML = pts.map((p, i) => i === pts.length - 1 ? `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="5" fill="#cbaa6b" stroke="var(--surface)" stroke-width="2.5"/>` : "").join("");
     if (animate && !reduceMotion) {
       const len = lineEl.getTotalLength();
       lineEl.style.transition = "none";
@@ -809,7 +809,7 @@
       const next = cur === "dark" ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
       store.set("aneva-theme", next);
-      $('meta[name="theme-color"]').setAttribute("content", next === "dark" ? "#060f20" : "#0b1f3a");
+      $('meta[name="theme-color"]').setAttribute("content", next === "dark" ? "#041711" : "#064e3b");
     });
   }
 

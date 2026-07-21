@@ -11,8 +11,8 @@ visualmente e estrategicamente com as maiores consultoras internacionais.
 
 ## ✨ Destaques
 
-- **Design premium** — minimalista, corporativo e tecnológico. Paleta azul-profundo
-  (`#0B1F3A`), branco, cinza claro e dourado metálico discreto.
+- **Design premium** — minimalista, corporativo e tecnológico. Paleta *emerald ink*
+  (`#064E3B`) e *champagne* (`#F8E7C9`), com branco e neutros suaves esverdeados.
 - **Centro de Inteligência Financeira** — ticker com indicadores do mercado angolano
   (câmbio, inflação, taxa diretora, LUIBOR, Brent, BODIVA — valores ilustrativos).
 - **Painel financeiro interativo** — gráficos de crescimento, fluxo de caixa e
