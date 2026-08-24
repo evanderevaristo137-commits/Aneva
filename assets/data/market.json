@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-21T06:22:14.916Z",
+  "updatedAt": "2026-08-24T06:30:49.091Z",
   "items": [
     {
       "id": "usdaoa",
@@ -7,13 +7,13 @@
         "pt": "USD/AOA",
         "en": "USD/AOA"
       },
-      "value": 925.24,
+      "value": 917.36,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.18,
+      "chg": -0.85,
       "chgType": "pct",
-      "dir": "bad",
+      "dir": "good",
       "src": "auto"
     },
     {
@@ -22,13 +22,13 @@
         "pt": "EUR/AOA",
         "en": "EUR/AOA"
       },
-      "value": 1080.85,
+      "value": 1071.45,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.46,
+      "chg": -0.87,
       "chgType": "pct",
-      "dir": "bad",
+      "dir": "good",
       "src": "auto"
     },
     {
@@ -37,13 +37,13 @@
         "pt": "GBP/AOA",
         "en": "GBP/AOA"
       },
-      "value": 1261.46,
+      "value": 1251.61,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.51,
+      "chg": -0.78,
       "chgType": "pct",
-      "dir": "bad",
+      "dir": "good",
       "src": "auto"
     },
     {
@@ -52,13 +52,13 @@
         "pt": "ZAR/AOA",
         "en": "ZAR/AOA"
       },
-      "value": 57.39,
+      "value": 57.29,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.16,
+      "chg": -0.17,
       "chgType": "pct",
-      "dir": "bad",
+      "dir": "good",
       "src": "auto"
     },
     {
@@ -127,13 +127,13 @@
         "pt": "WTI",
         "en": "WTI"
       },
-      "value": 72.05,
+      "value": 85.33,
       "dec": 2,
       "pre": "USD ",
       "suf": "",
-      "chg": 5.11,
+      "chg": -0.58,
       "chgType": "pct",
-      "dir": "up",
+      "dir": "down",
       "src": "commodity"
     },
     {
@@ -142,11 +142,11 @@
         "pt": "Ouro",
         "en": "Gold"
       },
-      "value": 4394.6,
+      "value": 4712.6,
       "dec": 0,
       "pre": "USD ",
       "suf": "",
-      "chg": 0.32,
+      "chg": 4.97,
       "chgType": "pct",
       "dir": "up",
       "src": "commodity"
@@ -184,7 +184,7 @@
   ],
   "log": [
     "câmbio: ok (API de mercado)",
-    "commodities: FALHOU — mantidos valores anteriores",
+    "commodities: 2/4 atualizadas (Yahoo)",
     "BNA: sem dados (definir BNA_URL) — valor manual mantido",
     "BODIVA: sem dados (definir BODIVA_URL) — valor manual mantido"
   ]
