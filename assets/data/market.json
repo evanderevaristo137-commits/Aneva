@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T16:55:57.441Z",
+  "updatedAt": "2026-08-28T17:46:15.492Z",
   "items": [
     {
       "id": "usdaoa",
@@ -7,13 +7,13 @@
         "pt": "USD/AOA",
         "en": "USD/AOA"
       },
-      "value": 924.72,
+      "value": 926.71,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.16,
+      "chg": 0.22,
       "chgType": "pct",
-      "dir": "good",
+      "dir": "bad",
       "src": "auto"
     },
     {
@@ -22,13 +22,13 @@
         "pt": "EUR/AOA",
         "en": "EUR/AOA"
       },
-      "value": 1078,
+      "value": 1079.75,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.27,
+      "chg": 0.16,
       "chgType": "pct",
-      "dir": "good",
+      "dir": "bad",
       "src": "auto"
     },
     {
@@ -37,13 +37,13 @@
         "pt": "GBP/AOA",
         "en": "GBP/AOA"
       },
-      "value": 1257.93,
+      "value": 1259.44,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.44,
+      "chg": 0.12,
       "chgType": "pct",
-      "dir": "good",
+      "dir": "bad",
       "src": "auto"
     },
     {
@@ -52,11 +52,11 @@
         "pt": "ZAR/AOA",
         "en": "ZAR/AOA"
       },
-      "value": 57.98,
+      "value": 57.96,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.21,
+      "chg": -0.03,
       "chgType": "pct",
       "dir": "good",
       "src": "auto"
