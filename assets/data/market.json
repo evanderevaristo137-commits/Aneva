@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T11:26:35.782Z",
+  "updatedAt": "2026-10-05T12:48:05.280Z",
   "items": [
     {
       "id": "usdaoa",
@@ -7,13 +7,13 @@
         "pt": "USD/AOA",
         "en": "USD/AOA"
       },
-      "value": 926.39,
+      "value": 922.26,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.18,
+      "chg": -0.45,
       "chgType": "pct",
-      "dir": "bad",
+      "dir": "good",
       "src": "auto"
     },
     {
@@ -22,11 +22,11 @@
         "pt": "EUR/AOA",
         "en": "EUR/AOA"
       },
-      "value": 1044.05,
+      "value": 1037.54,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.44,
+      "chg": -0.62,
       "chgType": "pct",
       "dir": "good",
       "src": "auto"
@@ -37,7 +37,7 @@
         "pt": "GBP/AOA",
         "en": "GBP/AOA"
       },
-      "value": 1223.56,
+      "value": 1220.36,
       "dec": 2,
       "pre": "",
       "suf": "",
@@ -52,11 +52,11 @@
         "pt": "ZAR/AOA",
         "en": "ZAR/AOA"
       },
-      "value": 55.59,
+      "value": 55.36,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -1.31,
+      "chg": -0.41,
       "chgType": "pct",
       "dir": "good",
       "src": "auto"
@@ -112,11 +112,11 @@
         "pt": "Brent",
         "en": "Brent"
       },
-      "value": 72.13,
+      "value": 102.56,
       "dec": 2,
       "pre": "USD ",
       "suf": "",
-      "chg": -1.39,
+      "chg": -0.94,
       "chgType": "pct",
       "dir": "down",
       "src": "commodity"
@@ -142,11 +142,11 @@
         "pt": "Ouro",
         "en": "Gold"
       },
-      "value": 4712.6,
+      "value": 4191.5,
       "dec": 0,
       "pre": "USD ",
       "suf": "",
-      "chg": 4.97,
+      "chg": 0.11,
       "chgType": "pct",
       "dir": "up",
       "src": "commodity"
@@ -184,7 +184,7 @@
   ],
   "log": [
     "câmbio: ok (API de mercado)",
-    "commodities: FALHOU — mantidos valores anteriores",
+    "commodities: 2/4 atualizadas (Yahoo)",
     "BNA: sem dados (definir BNA_URL) — valor manual mantido",
     "BODIVA: sem dados (definir BODIVA_URL) — valor manual mantido"
   ]
