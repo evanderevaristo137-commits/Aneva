@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-13T13:01:29.369Z",
+  "updatedAt": "2026-10-14T10:42:48.116Z",
   "items": [
     {
       "id": "usdaoa",
@@ -7,13 +7,13 @@
         "pt": "USD/AOA",
         "en": "USD/AOA"
       },
-      "value": 928.34,
+      "value": 927.77,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.88,
+      "chg": -0.06,
       "chgType": "pct",
-      "dir": "bad",
+      "dir": "good",
       "src": "auto"
     },
     {
@@ -22,11 +22,11 @@
         "pt": "EUR/AOA",
         "en": "EUR/AOA"
       },
-      "value": 1037.07,
+      "value": 1038.44,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.59,
+      "chg": 0.13,
       "chgType": "pct",
       "dir": "bad",
       "src": "auto"
@@ -37,11 +37,11 @@
         "pt": "GBP/AOA",
         "en": "GBP/AOA"
       },
-      "value": 1226.96,
+      "value": 1229.29,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.74,
+      "chg": 0.19,
       "chgType": "pct",
       "dir": "bad",
       "src": "auto"
@@ -52,11 +52,11 @@
         "pt": "ZAR/AOA",
         "en": "ZAR/AOA"
       },
-      "value": 56.11,
+      "value": 56.27,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.68,
+      "chg": 0.29,
       "chgType": "pct",
       "dir": "bad",
       "src": "auto"
@@ -157,11 +157,11 @@
         "pt": "Gás Natural",
         "en": "Natural Gas"
       },
-      "value": 3.25,
+      "value": 3.29,
       "dec": 2,
       "pre": "USD ",
       "suf": "",
-      "chg": 2.01,
+      "chg": 2.24,
       "chgType": "pct",
       "dir": "up",
       "src": "commodity"
