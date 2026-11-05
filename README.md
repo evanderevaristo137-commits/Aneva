@@ -6,6 +6,20 @@ Website institucional da **BEA Consulting**, consultora financeira em Angola:
 contabilidade, fiscalidade, auditoria, gestão financeira, estudos de viabilidade
 e acesso ao crédito, para empresas e investidores.
 
+## Páginas
+
+| Página | Ficheiro | Conteúdo |
+|---|---|---|
+| Início | `index.html` | Hero, indicadores de mercado, factura electrónica, "Por onde começar", serviços, atalhos e contacto |
+| Método | `metodo.html` | 8 etapas e "Porquê a BEA" |
+| Níveis | `niveis.html` | 3 níveis de acompanhamento e exemplo de relatório mensal |
+| Ferramentas | `ferramentas.html` | Simuladores |
+| Insights | `insights.html` | Notas práticas e perguntas frequentes |
+
+O cabeçalho, o menu e o rodapé repetem-se nas 5 páginas: uma alteração neles deve
+ser feita em todos os ficheiros. Os botões das subpáginas levam ao contacto da página
+inicial com o assunto já escolhido (`./?s=<assunto>#contacto`).
+
 ## O que o site inclui
 
 - **Por onde começar**: o cliente escolhe a sua situação (notificação da AGT,
@@ -48,7 +62,11 @@ Tipo de letra: **Poppins**, alojada no próprio site (`assets/fonts`, licença S
 
 ```
 .
-├── index.html               # Página
+├── index.html               # Página inicial
+├── metodo.html              # Método
+├── niveis.html              # Níveis de acompanhamento
+├── ferramentas.html         # Simuladores
+├── insights.html            # Insights e perguntas frequentes
 ├── assets/
 │   ├── css/styles.css       # Design system
 │   ├── js/main.js           # Conteúdo PT/EN, simuladores, interacções
