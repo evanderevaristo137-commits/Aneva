@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0F4F53" />
+  <title>Método · BEA Consulting</title>
+  <meta name="description" content="Como a BEA Consulting trabalha: 8 etapas, 15 verificações no fecho de cada mês e prazos fiscais que terminam antes dos da AGT." />
+  <link rel="canonical" href="https://evanderevaristo137-commits.github.io/Aneva/metodo.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BEA Consulting" />
+  <meta property="og:title" content="Método · BEA Consulting" />
+  <meta property="og:description" content="Como a BEA Consulting trabalha: 8 etapas, 15 verificações no fecho de cada mês e prazos fiscais que terminam antes dos da AGT." />
+  <meta property="og:url" content="https://evanderevaristo137-commits.github.io/Aneva/metodo.html" />
+  <meta property="og:image" content="https://evanderevaristo137-commits.github.io/Aneva/assets/img/og-image.png" />
+  <meta property="og:locale" content="pt_AO" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+  <link rel="preload" href="assets/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/poppins-800.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <script>
+    /* progressive enhancement + theme before first paint */
+    (function () {
+      var d = document.documentElement; d.classList.add("js");
+      var t = null;
+      try { t = localStorage.getItem("bea-theme"); } catch (e) {}
+      if (t !== "dark" && t !== "light" && !d.getAttribute("data-theme")) {
+        t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      if (t === "dark" || t === "light") d.setAttribute("data-theme", t);
+      /* failsafe: if main.js never boots, show everything */
+      setTimeout(function () { if (!window.__bea) d.classList.remove("js"); }, 2500);
+    })();
+  </script>
+
+</head>
+<body data-page="metodo">
+  <a href="#conteudo" class="skip" data-i18n="skip">Saltar para o conteúdo</a>
+
+  <!-- ================= HEADER ================= -->
+  <header class="hdr" id="hdr">
+    <div class="wrap hdr__in">
+      <a href="./" class="hdr__brand" aria-label="BEA Consulting — início">
+        <img class="logo logo--light" src="assets/img/logo-teal.png" alt="BEA Consulting" width="91" height="48" />
+        <img class="logo logo--dark" src="assets/img/logo-white.png" alt="" aria-hidden="true" width="91" height="48" />
+      </a>
+      <nav class="nav" aria-label="Principal" data-i18n-aria="nav.label">
+        <a href="./#servicos" data-i18n="nav.services">Serviços</a>
+        <a href="metodo.html" class="is-active" aria-current="page" data-i18n="nav.method">Método</a>
+        <a href="niveis.html" data-i18n="nav.tiers">Níveis</a>
+        <a href="ferramentas.html" data-i18n="nav.tools">Ferramentas</a>
+        <a href="insights.html" data-i18n="nav.insights">Insights</a>
+        <a href="./#contacto" data-i18n="nav.contact">Contacto</a>
+      </nav>
+      <div class="hdr__tools">
+        <button class="ibtn ibtn--lang" id="langBtn" type="button" aria-label="Mudar para inglês" data-i18n-aria="lang.aria"><span id="langCode">EN</span></button>
+        <button class="ibtn" id="themeBtn" type="button" aria-label="Alternar tema claro/escuro" data-i18n-aria="theme.aria">
+          <svg class="theme-ico--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="theme-ico--moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        </button>
+        <a href="./?s=diag#contacto" class="btn btn--amber btn--sm hdr__cta" data-service="diag" data-i18n="cta.diag">Diagnóstico gratuito</a>
+        <button class="ibtn nav-toggle" id="navToggle" type="button" aria-label="Abrir menu" data-i18n-aria="menu.open" aria-expanded="false" aria-controls="drawer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <div class="drawer" id="drawer">
+    <div class="drawer__scrim" data-close></div>
+    <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
+      <div class="drawer__head">
+        <img class="logo logo--light" src="assets/img/logo-teal.png" alt="BEA Consulting" width="72" height="38" />
+        <img class="logo logo--dark" src="assets/img/logo-white.png" alt="" aria-hidden="true" width="72" height="38" />
+        <button class="ibtn" type="button" data-close aria-label="Fechar menu" data-i18n-aria="menu.close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <a href="./" data-close data-i18n="nav.home">Início</a>
+      <a href="./#comecar" data-close data-i18n="nav.start">Por onde começar</a>
+      <a href="./#servicos" data-close data-i18n="nav.services">Serviços</a>
+      <a href="metodo.html" data-close data-i18n="nav.method">Método</a>
+      <a href="niveis.html" data-close data-i18n="nav.tiers">Níveis</a>
+      <a href="ferramentas.html" data-close data-i18n="nav.tools">Ferramentas</a>
+      <a href="insights.html" data-close data-i18n="nav.insights">Insights</a>
+      <a href="insights.html#faq" data-close data-i18n="nav.faq">Perguntas frequentes</a>
+      <a href="./#contacto" data-close data-i18n="nav.contact">Contacto</a>
+      <a href="./?s=diag#contacto" class="btn btn--amber" data-close data-service="diag" data-i18n="cta.diag">Diagnóstico gratuito</a>
+    </div>
+  </div>
+
+  <main id="top">
+    <div id="conteudo"></div>
+    <!-- ================= PAGE HERO ================= -->
+    <section class="phero band-taupe" aria-labelledby="page-title">
+      <div class="wrap">
+        <div class="reveal">
+          <nav class="crumbs" aria-label="Breadcrumb"><a href="./" data-i18n="nav.home">Início</a><span aria-hidden="true">/</span><span aria-current="page" data-i18n="nav.method">Método</span></nav>
+          <p class="eyebrow eyebrow--light" data-i18n="met.eyebrow">Como trabalhamos</p>
+          <h1 class="phero__title" id="page-title"><span data-i18n="met.t1">8 etapas.</span> <span class="amber nl" data-i18n="met.t2">Zero improvisos.</span></h1>
+          <p class="phero__lead" data-i18n="met.lead">O mesmo processo com todos os clientes, do primeiro contacto ao acompanhamento das melhorias.</p>
+        </div>
+        <ol class="method__list" id="methodList"></ol>
+      </div>
+    </section>
+
+    <!-- ================= RIGOUR (bento) ================= -->
+    <section class="sec" id="rigor" aria-labelledby="rigor-title">
+      <div class="wrap">
+        <div class="sec__head reveal">
+          <p class="eyebrow" data-i18n="rig.eyebrow">Porquê a BEA</p>
+          <h2 class="sec__title" id="rigor-title"><span data-i18n="rig.t1">Com método, prazos e</span> <span class="mark" data-i18n="rig.t2">revisão.</span></h2>
+          <p class="sec__lead" data-i18n="rig.lead">Não é uma promessa vaga: é assim que trabalhamos, todos os meses, com todos os clientes.</p>
+        </div>
+
+        <div class="bento">
+          <article class="card tile tile--a reveal">
+            <div class="tile__top">
+              <span class="numbox">15</span>
+              <h3 class="tile__title"><span data-i18n="rig.a.t">verificações</span><span data-i18n="rig.a.s">no fecho de cada mês.</span></h3>
+            </div>
+            <ul class="checks checks--2">
+              <li data-i18n="rig.a.1">Reconciliações bancárias concluídas</li>
+              <li data-i18n="rig.a.2">Clientes e fornecedores revistos</li>
+              <li data-i18n="rig.a.3">Folha de salários e encargos tratados</li>
+              <li data-i18n="rig.a.4">Impostos apurados e declarados</li>
+              <li data-i18n="rig.a.5">Pagamentos fiscais controlados</li>
+              <li data-i18n="rig.a.6">Balancete emitido e analisado</li>
+            </ul>
+            <span class="more-pill" data-i18n="rig.a.more">+ 9 verificações</span>
+            <p class="tile__note" data-i18n="rig.a.note">No fim, recebe um resumo com as principais variações, pendências e riscos do mês.</p>
+          </article>
+
+          <article class="card tile tile--b reveal d1">
+            <h3 class="tile__title"><span data-i18n="rig.b.t1">Os nossos prazos terminam</span> <span class="amber" data-i18n="rig.b.t2">antes</span> <span data-i18n="rig.b.t3">dos da AGT.</span></h3>
+            <div class="deadline" aria-hidden="true">
+              <span class="deadline__lbl deadline__lbl--bea" data-i18n="rig.b.bea">Prazo BEA</span>
+              <span class="deadline__lbl deadline__lbl--legal" data-i18n="rig.b.legal">Prazo legal</span>
+              <div class="deadline__track"><span class="deadline__dot deadline__dot--bea"></span><span class="deadline__dot deadline__dot--legal"></span></div>
+              <span class="deadline__gap" data-i18n="rig.b.gap">Margem para rever e corrigir</span>
+            </div>
+            <p class="tile__note" data-i18n="rig.b.note">Criamos um calendário fiscal só para a sua empresa, com prazos internos antes dos legais e pedidos de documentos feitos com antecedência.</p>
+          </article>
+
+          <article class="card tile tile--c reveal">
+            <h3 class="tile__title" data-i18n="rig.c.t">Submeter não é cumprir.</h3>
+            <ol class="steps-v">
+              <li data-n="1"><span data-i18n="rig.c.1">Declaração preparada</span></li>
+              <li data-n="2"><span data-i18n="rig.c.2">Declaração revista</span></li>
+              <li data-n="3"><span data-i18n="rig.c.3">Declaração submetida</span></li>
+              <li class="is-done"><span><b data-i18n="rig.c.4">Imposto pago</b><br /><span class="badge-teal" data-i18n="rig.c.4b">Só aqui está cumprida</span></span></li>
+            </ol>
+            <p class="tile__note" data-i18n="rig.c.note">Para nós, uma obrigação só está cumprida quando o imposto está pago e o comprovativo arquivado.</p>
+          </article>
+
+          <article class="card tile tile--d reveal d1">
+            <h3 class="tile__title"><span data-i18n="rig.d.t1">Não esperamos</span> <span class="amber" data-i18n="rig.d.t2">pelo fim do mês.</span></h3>
+            <ol class="routine">
+              <li><div><b data-i18n="rig.d.1k">Diária</b><span data-i18n="rig.d.1">Movimentos, pagamentos e cobranças registados</span></div></li>
+              <li><div><b data-i18n="rig.d.2k">Semanal</b><span data-i18n="rig.d.2">Revisão de caixa e de contas a pagar e a receber</span></div></li>
+              <li><div><b data-i18n="rig.d.3k">Mensal</b><span data-i18n="rig.d.3">Fecho do mês, relatório de gestão e reunião de resultados</span></div></li>
+              <li><div><b data-i18n="rig.d.4k">Trimestral</b><span data-i18n="rig.d.4">Revisão de cenários e do orçamento, com plano de acção</span></div></li>
+            </ol>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DIAGNÓSTICO ================= -->
+    <section class="sec band-teal" id="diagnostico" aria-labelledby="diag-title">
+      <div class="wrap diag">
+        <div class="reveal">
+          <h2 class="diag__q" id="diag-title" data-i18n="diag.q">Quer saber em que estado está a sua empresa?</h2>
+          <p class="diag__box" data-i18n="diag.box">Diagnóstico gratuito</p>
+        </div>
+        <div class="diag__card reveal d1">
+          <ul class="checks checks--teal">
+            <li data-i18n="diag.1">Ficha de diagnóstico</li>
+            <li data-i18n="diag.2">Mapa de pendências</li>
+            <li data-i18n="diag.3">Plano de trabalho</li>
+          </ul>
+          <p class="sec__lead" data-i18n="diag.lead">Sem compromisso. Fica a saber onde está e por onde começar.</p>
+          <div class="diag__actions">
+            <a href="./?s=diag#contacto" class="btn btn--amber" data-service="diag" data-i18n="cta.diagAsk">Pedir diagnóstico gratuito</a>
+            <a href="https://wa.me/244936673669" class="btn btn--light" data-wa target="_blank" rel="noopener"><span data-i18n="cta.wa">Falar no WhatsApp</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="ftr">
+    <div class="wrap">
+      <div class="ftr__grid">
+        <div>
+          <img class="logo" src="assets/img/logo-white.png" alt="BEA Consulting" width="98" height="52" />
+          <p class="ftr__about" data-i18n="ftr.about">Contabilidade, fiscalidade, auditoria, gestão financeira, estudos de viabilidade e acesso ao crédito, em Angola.</p>
+        </div>
+        <div class="ftr__col">
+          <h4 data-i18n="ftr.services">Serviços</h4>
+          <a href="./#servicos" data-i18n="p1.t">Gestão Financeira</a>
+          <a href="./#servicos" data-i18n="p2.t">Análise &amp; Financiamento</a>
+          <a href="./#servicos" data-i18n="p3.t">Fiscalidade, Auditoria &amp; Sistemas</a>
+          <a href="./?s=diag#contacto" data-service="diag" data-i18n="cta.diag">Diagnóstico gratuito</a>
+        </div>
+        <div class="ftr__col">
+          <h4 data-i18n="ftr.company">A BEA</h4>
+          <a href="./#comecar" data-i18n="nav.start">Por onde começar</a>
+          <a href="metodo.html" data-i18n="nav.method">Método</a>
+          <a href="niveis.html" data-i18n="nav.tiers">Níveis</a>
+          <a href="ferramentas.html" data-i18n="nav.tools">Ferramentas</a>
+          <a href="insights.html" data-i18n="nav.insights">Insights</a>
+          <a href="insights.html#faq" data-i18n="nav.faq">Perguntas frequentes</a>
+        </div>
+        <div class="ftr__col">
+          <h4 data-i18n="ftr.contact">Fale com a BEA</h4>
+          <a href="tel:+244936673669">+244 936 673 669</a>
+          <a class="ftr__wa" href="https://wa.me/244936673669" data-wa target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2Zm5 14c-.2.6-1.2 1.1-1.7 1.1-.4 0-1 .1-3.3-.9-2.8-1.2-4.5-4-4.6-4.2-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.1.2-.3.3-.1.6.5.9 1.1 1.5 1.9 2 .3.2.5.1.7-.1l.6-.8c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.7-.1 1.3Z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="ftr__bottom">
+        <span>© <span id="year">2026</span> BEA Consulting · <span data-i18n="ftr.rights">Todos os direitos reservados.</span></span>
+        <a href="#top" data-i18n="ftr.top">Voltar ao topo ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating + mobile action bar -->
+  <a href="https://wa.me/244936673669" class="fab" data-wa target="_blank" rel="noopener" aria-label="Falar no WhatsApp" data-i18n-aria="cta.wa">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2Zm5 14c-.2.6-1.2 1.1-1.7 1.1-.4 0-1 .1-3.3-.9-2.8-1.2-4.5-4-4.6-4.2-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.1.2-.3.3-.1.6.5.9 1.1 1.5 1.9 2 .3.2.5.1.7-.1l.6-.8c.2-.2.3-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.7-.1 1.3Z"/></svg>
+  </a>
+  <button class="totop" id="toTop" type="button" aria-label="Voltar ao topo" data-i18n-aria="ftr.top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+  <nav class="mbar" aria-label="Acções rápidas" data-i18n-aria="mbar.aria">
+    <a href="https://wa.me/244936673669" class="btn btn--wa" data-wa target="_blank" rel="noopener">WhatsApp</a>
+    <a href="./?s=diag#contacto" class="btn btn--amber" data-service="diag" data-i18n="cta.diag">Diagnóstico gratuito</a>
+  </nav>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

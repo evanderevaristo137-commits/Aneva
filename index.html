@@ -11,8 +11,9 @@
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="BEA Consulting" />
-  <meta property="og:title" content="BEA Consulting · Decida com números, não com palpites." />
-  <meta property="og:description" content="Contabilidade, fiscalidade, auditoria e gestão financeira para empresas e investidores em Angola. Diagnóstico gratuito." />
+  <meta property="og:title" content="BEA Consulting · Consultoria financeira em Angola" />
+  <meta property="og:description" content="BEA Consulting: contabilidade, fiscalidade, auditoria, gestão financeira, estudos de viabilidade e acesso ao crédito em Angola. Decida com números, não com palpites. Diagnóstico gratuito." />
+  <meta property="og:url" content="https://evanderevaristo137-commits.github.io/Aneva/" />
   <meta property="og:image" content="https://evanderevaristo137-commits.github.io/Aneva/assets/img/og-image.png" />
   <meta property="og:locale" content="pt_AO" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -52,23 +53,24 @@
     "address": { "@type": "PostalAddress", "addressCountry": "AO" }
   }
   </script>
+
 </head>
-<body>
+<body data-page="home">
   <a href="#conteudo" class="skip" data-i18n="skip">Saltar para o conteúdo</a>
 
   <!-- ================= HEADER ================= -->
   <header class="hdr" id="hdr">
     <div class="wrap hdr__in">
       <a href="#top" class="hdr__brand" aria-label="BEA Consulting — início">
-        <img class="logo logo--light" src="assets/img/logo-teal.png" alt="BEA Consulting" width="83" height="44" />
-        <img class="logo logo--dark" src="assets/img/logo-white.png" alt="" aria-hidden="true" width="83" height="44" />
+        <img class="logo logo--light" src="assets/img/logo-teal.png" alt="BEA Consulting" width="91" height="48" />
+        <img class="logo logo--dark" src="assets/img/logo-white.png" alt="" aria-hidden="true" width="91" height="48" />
       </a>
       <nav class="nav" aria-label="Principal" data-i18n-aria="nav.label">
         <a href="#servicos" data-i18n="nav.services">Serviços</a>
-        <a href="#metodo" data-i18n="nav.method">Método</a>
-        <a href="#niveis" data-i18n="nav.tiers">Níveis</a>
-        <a href="#ferramentas" data-i18n="nav.tools">Ferramentas</a>
-        <a href="#insights" data-i18n="nav.insights">Insights</a>
+        <a href="metodo.html" data-i18n="nav.method">Método</a>
+        <a href="niveis.html" data-i18n="nav.tiers">Níveis</a>
+        <a href="ferramentas.html" data-i18n="nav.tools">Ferramentas</a>
+        <a href="insights.html" data-i18n="nav.insights">Insights</a>
         <a href="#contacto" data-i18n="nav.contact">Contacto</a>
       </nav>
       <div class="hdr__tools">
@@ -94,19 +96,21 @@
         <img class="logo logo--dark" src="assets/img/logo-white.png" alt="" aria-hidden="true" width="72" height="38" />
         <button class="ibtn" type="button" data-close aria-label="Fechar menu" data-i18n-aria="menu.close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       </div>
+      <a href="#top" data-close data-i18n="nav.home">Início</a>
       <a href="#comecar" data-close data-i18n="nav.start">Por onde começar</a>
       <a href="#servicos" data-close data-i18n="nav.services">Serviços</a>
-      <a href="#metodo" data-close data-i18n="nav.method">Método</a>
-      <a href="#niveis" data-close data-i18n="nav.tiers">Níveis</a>
-      <a href="#ferramentas" data-close data-i18n="nav.tools">Ferramentas</a>
-      <a href="#insights" data-close data-i18n="nav.insights">Insights</a>
-      <a href="#faq" data-close data-i18n="nav.faq">Perguntas frequentes</a>
+      <a href="metodo.html" data-close data-i18n="nav.method">Método</a>
+      <a href="niveis.html" data-close data-i18n="nav.tiers">Níveis</a>
+      <a href="ferramentas.html" data-close data-i18n="nav.tools">Ferramentas</a>
+      <a href="insights.html" data-close data-i18n="nav.insights">Insights</a>
+      <a href="insights.html#faq" data-close data-i18n="nav.faq">Perguntas frequentes</a>
       <a href="#contacto" data-close data-i18n="nav.contact">Contacto</a>
       <a href="#contacto" class="btn btn--amber" data-close data-service="diag" data-i18n="cta.diag">Diagnóstico gratuito</a>
     </div>
   </div>
 
   <main id="top">
+    <div id="conteudo"></div>
     <!-- ================= HERO ================= -->
     <section class="hero band-teal" aria-labelledby="hero-title">
       <div class="wrap hero__grid">
@@ -177,8 +181,6 @@
       </div>
     </section>
 
-    <div id="conteudo"></div>
-
     <!-- ================= ROUTER ================= -->
     <section class="sec" id="comecar" aria-labelledby="router-title">
       <div class="wrap">
@@ -219,195 +221,52 @@
       </div>
     </section>
 
-    <!-- ================= RIGOUR (bento) ================= -->
-    <section class="sec" id="rigor" aria-labelledby="rigor-title">
+    <!-- ================= EXPLORE ================= -->
+    <section class="sec" id="explorar" aria-labelledby="exp-title">
       <div class="wrap">
         <div class="sec__head reveal">
-          <p class="eyebrow" data-i18n="rig.eyebrow">Porquê a BEA</p>
-          <h2 class="sec__title" id="rigor-title"><span data-i18n="rig.t1">Com método, prazos e</span> <span class="mark" data-i18n="rig.t2">revisão.</span></h2>
-          <p class="sec__lead" data-i18n="rig.lead">Não é uma promessa vaga: é assim que trabalhamos, todos os meses, com todos os clientes.</p>
+          <p class="eyebrow" data-i18n="exp.eyebrow">Saiba mais</p>
+          <h2 class="sec__title" id="exp-title"><span data-i18n="exp.t1">Conheça a BEA</span> <span class="mark" data-i18n="exp.t2">por dentro.</span></h2>
+          <p class="sec__lead" data-i18n="exp.lead">Cada tema tem a sua página. Abra só o que lhe interessa.</p>
         </div>
-
-        <div class="bento">
-          <article class="card tile tile--a reveal">
-            <div class="tile__top">
-              <span class="numbox">15</span>
-              <h3 class="tile__title"><span data-i18n="rig.a.t">verificações</span><span data-i18n="rig.a.s">no fecho de cada mês.</span></h3>
-            </div>
-            <ul class="checks checks--2">
-              <li data-i18n="rig.a.1">Reconciliações bancárias concluídas</li>
-              <li data-i18n="rig.a.2">Clientes e fornecedores revistos</li>
-              <li data-i18n="rig.a.3">Folha de salários e encargos tratados</li>
-              <li data-i18n="rig.a.4">Impostos apurados e declarados</li>
-              <li data-i18n="rig.a.5">Pagamentos fiscais controlados</li>
-              <li data-i18n="rig.a.6">Balancete emitido e analisado</li>
-            </ul>
-            <span class="more-pill" data-i18n="rig.a.more">+ 9 verificações</span>
-            <p class="tile__note" data-i18n="rig.a.note">No fim, recebe um resumo com as principais variações, pendências e riscos do mês.</p>
-          </article>
-
-          <article class="card tile tile--b reveal d1">
-            <h3 class="tile__title"><span data-i18n="rig.b.t1">Os nossos prazos terminam</span> <span class="amber" data-i18n="rig.b.t2">antes</span> <span data-i18n="rig.b.t3">dos da AGT.</span></h3>
-            <div class="deadline" aria-hidden="true">
-              <span class="deadline__lbl deadline__lbl--bea" data-i18n="rig.b.bea">Prazo BEA</span>
-              <span class="deadline__lbl deadline__lbl--legal" data-i18n="rig.b.legal">Prazo legal</span>
-              <div class="deadline__track"><span class="deadline__dot deadline__dot--bea"></span><span class="deadline__dot deadline__dot--legal"></span></div>
-              <span class="deadline__gap" data-i18n="rig.b.gap">Margem para rever e corrigir</span>
-            </div>
-            <p class="tile__note" data-i18n="rig.b.note">Criamos um calendário fiscal só para a sua empresa, com prazos internos antes dos legais e pedidos de documentos feitos com antecedência.</p>
-          </article>
-
-          <article class="card tile tile--c reveal">
-            <h3 class="tile__title" data-i18n="rig.c.t">Submeter não é cumprir.</h3>
-            <ol class="steps-v">
-              <li data-n="1"><span data-i18n="rig.c.1">Declaração preparada</span></li>
-              <li data-n="2"><span data-i18n="rig.c.2">Declaração revista</span></li>
-              <li data-n="3"><span data-i18n="rig.c.3">Declaração submetida</span></li>
-              <li class="is-done"><span><b data-i18n="rig.c.4">Imposto pago</b><br /><span class="badge-teal" data-i18n="rig.c.4b">Só aqui está cumprida</span></span></li>
-            </ol>
-            <p class="tile__note" data-i18n="rig.c.note">Para nós, uma obrigação só está cumprida quando o imposto está pago e o comprovativo arquivado.</p>
-          </article>
-
-          <article class="card tile tile--d reveal d1">
-            <h3 class="tile__title"><span data-i18n="rig.d.t1">Não esperamos</span> <span class="amber" data-i18n="rig.d.t2">pelo fim do mês.</span></h3>
-            <ol class="routine">
-              <li><div><b data-i18n="rig.d.1k">Diária</b><span data-i18n="rig.d.1">Movimentos, pagamentos e cobranças registados</span></div></li>
-              <li><div><b data-i18n="rig.d.2k">Semanal</b><span data-i18n="rig.d.2">Revisão de caixa e de contas a pagar e a receber</span></div></li>
-              <li><div><b data-i18n="rig.d.3k">Mensal</b><span data-i18n="rig.d.3">Fecho do mês, relatório de gestão e reunião de resultados</span></div></li>
-              <li><div><b data-i18n="rig.d.4k">Trimestral</b><span data-i18n="rig.d.4">Revisão de cenários e do orçamento, com plano de acção</span></div></li>
-            </ol>
-          </article>
+        <div class="explore">
+          <a class="card xcard xcard--taupe reveal" href="metodo.html">
+            <span class="xcard__bar" aria-hidden="true"></span>
+            <span class="xcard__in">
+              <span class="xcard__k" data-i18n="nav.method">Método</span>
+              <span class="xcard__t" data-i18n="exp.m.t">8 etapas. Zero improvisos.</span>
+              <span class="xcard__d" data-i18n="exp.m.d">Como trabalhamos e porque os nossos prazos terminam antes dos da AGT.</span>
+              <span class="link"><span data-i18n="exp.m.cta">Ver o método</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </a>
+          <a class="card xcard xcard--teal reveal d1" href="niveis.html">
+            <span class="xcard__bar" aria-hidden="true"></span>
+            <span class="xcard__in">
+              <span class="xcard__k" data-i18n="nav.tiers">Níveis</span>
+              <span class="xcard__t" data-i18n="exp.n.t">Três níveis de acompanhamento.</span>
+              <span class="xcard__d" data-i18n="exp.n.d">Do controlo ao departamento financeiro externo. Cada nível inclui o anterior.</span>
+              <span class="link"><span data-i18n="exp.n.cta">Ver os níveis</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </a>
+          <a class="card xcard xcard--ink reveal d2" href="ferramentas.html">
+            <span class="xcard__bar" aria-hidden="true"></span>
+            <span class="xcard__in">
+              <span class="xcard__k" data-i18n="nav.tools">Ferramentas</span>
+              <span class="xcard__t" data-i18n="exp.f.t">Faça as contas antes de decidir.</span>
+              <span class="xcard__d" data-i18n="exp.f.d">6 simuladores gratuitos: VAL e TIR, margem, crédito, fluxo de caixa e mais.</span>
+              <span class="link"><span data-i18n="exp.f.cta">Abrir as ferramentas</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </a>
+          <a class="card xcard xcard--amber reveal d3" href="insights.html">
+            <span class="xcard__bar" aria-hidden="true"></span>
+            <span class="xcard__in">
+              <span class="xcard__k" data-i18n="nav.insights">Insights</span>
+              <span class="xcard__t" data-i18n="exp.i.t">O que precisa de saber, sem rodeios.</span>
+              <span class="xcard__d" data-i18n="exp.i.d">Notas práticas sobre fiscalidade e financiamento, e as perguntas frequentes.</span>
+              <span class="link"><span data-i18n="exp.i.cta">Ler os insights</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </a>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= METHOD (8 etapas) ================= -->
-    <section class="sec band-taupe" id="metodo" aria-labelledby="method-title">
-      <div class="wrap">
-        <div class="method__head reveal">
-          <p class="eyebrow eyebrow--light" data-i18n="met.eyebrow">Como trabalhamos</p>
-          <h2 class="method__title" id="method-title"><span data-i18n="met.t1">8 etapas.</span> <span class="amber" data-i18n="met.t2">Zero improvisos.</span></h2>
-          <p class="sec__lead" data-i18n="met.lead">O mesmo processo com todos os clientes, do primeiro contacto ao acompanhamento das melhorias.</p>
-        </div>
-        <ol class="method__list" id="methodList"></ol>
-      </div>
-    </section>
-
-    <!-- ================= TIERS ================= -->
-    <section class="sec" id="niveis" aria-labelledby="tiers-title">
-      <div class="wrap">
-        <div class="sec__head reveal">
-          <p class="eyebrow" data-i18n="tier.eyebrow">Níveis de acompanhamento</p>
-          <h2 class="sec__title" id="tiers-title"><span data-i18n="tier.t1">Até onde quer que a BEA</span> <span class="mark" data-i18n="tier.t2">vá consigo?</span></h2>
-          <p class="sec__lead" data-i18n="tier.lead">Três níveis. Cada um inclui o anterior.</p>
-        </div>
-        <div class="tiers" id="tiers"></div>
-      </div>
-    </section>
-
-    <!-- ================= REPORT ================= -->
-    <section class="sec sec--alt" id="relatorio" aria-labelledby="report-title">
-      <div class="wrap report">
-        <div class="report__copy reveal">
-          <p class="eyebrow" data-i18n="rep.eyebrow">Contabilidade de gestão</p>
-          <h2 class="sec__title" id="report-title"><span data-i18n="rep.t1">Contabilidade para decidir.</span> <span data-i18n="rep.t2">Não só para declarar.</span></h2>
-          <ul class="checks checks--teal">
-            <li data-i18n="rep.1">Lançamentos por centro de custo</li>
-            <li data-i18n="rep.2">Fecho mensal em data fixa</li>
-            <li data-i18n="rep.3">Relatório de gestão com resultados, balanço e fluxo de caixa</li>
-          </ul>
-          <div><button type="button" class="btn btn--outline btn--sm" data-open-service="s02" data-i18n="rep.cta">Ver o serviço</button></div>
-        </div>
-
-        <div class="card dash reveal d1">
-          <div class="dash__head">
-            <div>
-              <p class="dash__kicker" data-i18n="rep.kicker">Relatório mensal de gestão · exemplo</p>
-              <div class="dash__value"><span class="n" id="dashValue">AOA 248M</span><span class="pill-up" id="dashPill">▲ 18,4%</span></div>
-            </div>
-            <div class="tabs" id="dashTabs" role="tablist">
-              <button class="tab is-active" type="button" role="tab" aria-selected="true" data-series="growth" data-i18n="rep.tab1">Resultados</button>
-              <button class="tab" type="button" role="tab" aria-selected="false" data-series="cash" data-i18n="rep.tab2">Fluxo de caixa</button>
-              <button class="tab" type="button" role="tab" aria-selected="false" data-series="profit" data-i18n="rep.tab3">Margem</button>
-            </div>
-          </div>
-          <svg viewBox="0 0 640 240" class="area-chart" id="mainChart" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#176E74" stop-opacity=".30"/><stop offset="1" stop-color="#176E74" stop-opacity="0"/></linearGradient>
-            </defs>
-            <g id="gridLines" stroke="var(--border-strong)" stroke-width="1"></g>
-            <path id="chartFill" fill="url(#ag)" d=""></path>
-            <path id="chartLine" fill="none" stroke="#D4943A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d=""></path>
-            <g id="chartDots"></g>
-          </svg>
-          <div class="chart-x" id="chartX"></div>
-          <div class="kpis">
-            <div class="kpi"><small data-i18n="rep.k1">Margem líquida</small><b data-i18n="rep.k1v">17,2%</b></div>
-            <div class="kpi"><small data-i18n="rep.k2">Liquidez geral</small><b data-i18n="rep.k2v">1,9x</b></div>
-            <div class="kpi"><small data-i18n="rep.k3">Prazo médio de recebimento</small><b data-i18n="rep.k3v">42 dias</b></div>
-          </div>
-          <p class="demo-note" data-i18n="rep.note">Valores ilustrativos de um relatório tipo.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= DIAGNÓSTICO ================= -->
-    <section class="sec band-teal" id="diagnostico" aria-labelledby="diag-title">
-      <div class="wrap diag">
-        <div class="reveal">
-          <h2 class="diag__q" id="diag-title" data-i18n="diag.q">Quer saber em que estado está a sua empresa?</h2>
-          <p class="diag__box" data-i18n="diag.box">Diagnóstico gratuito</p>
-        </div>
-        <div class="diag__card reveal d1">
-          <ul class="checks checks--teal">
-            <li data-i18n="diag.1">Ficha de diagnóstico</li>
-            <li data-i18n="diag.2">Mapa de pendências</li>
-            <li data-i18n="diag.3">Plano de trabalho</li>
-          </ul>
-          <p class="sec__lead" data-i18n="diag.lead">Sem compromisso. Fica a saber onde está e por onde começar.</p>
-          <div class="diag__actions">
-            <a href="#contacto" class="btn btn--amber" data-service="diag" data-i18n="cta.diagAsk">Pedir diagnóstico gratuito</a>
-            <a href="https://wa.me/244936673669" class="btn btn--light" data-wa target="_blank" rel="noopener"><span data-i18n="cta.wa">Falar no WhatsApp</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= TOOLS ================= -->
-    <section class="sec" id="ferramentas" aria-labelledby="tools-title">
-      <div class="wrap">
-        <div class="sec__head reveal">
-          <p class="eyebrow" data-i18n="tools.eyebrow">Ferramentas</p>
-          <h2 class="sec__title" id="tools-title"><span data-i18n="tools.t1">Faça as contas</span> <span class="mark" data-i18n="tools.t2">antes</span> <span data-i18n="tools.t3">de decidir.</span></h2>
-          <p class="sec__lead" data-i18n="tools.lead">Simuladores gratuitos para estimativas rápidas. Para uma análise à medida, fale com a BEA.</p>
-        </div>
-        <div class="sim reveal">
-          <div class="sim__menu" id="simMenu" role="tablist" aria-label="Simuladores"></div>
-          <div class="card sim__panel" id="simPanel" role="tabpanel"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= INSIGHTS ================= -->
-    <section class="sec sec--alt" id="insights" aria-labelledby="ins-title">
-      <div class="wrap">
-        <div class="sec__head reveal">
-          <p class="eyebrow" data-i18n="ins.eyebrow">Insights</p>
-          <h2 class="sec__title" id="ins-title"><span data-i18n="ins.t1">O que precisa de saber,</span> <span class="mark" data-i18n="ins.t2">sem rodeios.</span></h2>
-          <p class="sec__lead" data-i18n="ins.lead">Notas práticas da equipa BEA sobre fiscalidade, financiamento e gestão em Angola.</p>
-        </div>
-        <div class="insights" id="insightsGrid"></div>
-      </div>
-    </section>
-
-    <!-- ================= FAQ ================= -->
-    <section class="sec" id="faq" aria-labelledby="faq-title">
-      <div class="wrap">
-        <div class="sec__head reveal">
-          <p class="eyebrow" data-i18n="faq.eyebrow">Perguntas frequentes</p>
-          <h2 class="sec__title" id="faq-title" data-i18n="faq.title">Antes de falar connosco</h2>
-        </div>
-        <div class="faq" id="faqList"></div>
       </div>
     </section>
 
@@ -474,15 +333,16 @@
           <a href="#servicos" data-i18n="p1.t">Gestão Financeira</a>
           <a href="#servicos" data-i18n="p2.t">Análise &amp; Financiamento</a>
           <a href="#servicos" data-i18n="p3.t">Fiscalidade, Auditoria &amp; Sistemas</a>
-          <a href="#diagnostico" data-i18n="cta.diag">Diagnóstico gratuito</a>
+          <a href="#contacto" data-service="diag" data-i18n="cta.diag">Diagnóstico gratuito</a>
         </div>
         <div class="ftr__col">
           <h4 data-i18n="ftr.company">A BEA</h4>
           <a href="#comecar" data-i18n="nav.start">Por onde começar</a>
-          <a href="#metodo" data-i18n="nav.method">Método</a>
-          <a href="#niveis" data-i18n="nav.tiers">Níveis</a>
-          <a href="#ferramentas" data-i18n="nav.tools">Ferramentas</a>
-          <a href="#faq" data-i18n="nav.faq">Perguntas frequentes</a>
+          <a href="metodo.html" data-i18n="nav.method">Método</a>
+          <a href="niveis.html" data-i18n="nav.tiers">Níveis</a>
+          <a href="ferramentas.html" data-i18n="nav.tools">Ferramentas</a>
+          <a href="insights.html" data-i18n="nav.insights">Insights</a>
+          <a href="insights.html#faq" data-i18n="nav.faq">Perguntas frequentes</a>
         </div>
         <div class="ftr__col">
           <h4 data-i18n="ftr.contact">Fale com a BEA</h4>

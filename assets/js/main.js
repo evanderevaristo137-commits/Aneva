@@ -17,12 +17,27 @@
 
   var WA_NUMBER = "244936673669";
 
+  // Multi-page site: index (home) + metodo, niveis, ferramentas, insights.
+  var PAGE = (document.body && document.body.getAttribute("data-page")) || "home";
+  function hasContact() { return !!document.getElementById("contactForm"); }
+  // CTAs on sub-pages send the visitor to the home contact form with the subject pre-selected.
+  function contactHref(id) { return hasContact() ? "#contacto" : "./?s=" + encodeURIComponent(id) + "#contacto"; }
+
   /* ---------------------------------------------------------
      1. STATIC STRINGS (data-i18n)
      --------------------------------------------------------- */
   var I18N = {
     pt: {
-      "doc.title": "BEA Consulting · Consultoria financeira em Angola",
+      "doc.title.home": "BEA Consulting · Consultoria financeira em Angola",
+      "doc.title.metodo": "Método · BEA Consulting", "doc.title.niveis": "Níveis de acompanhamento · BEA Consulting",
+      "doc.title.ferramentas": "Ferramentas · BEA Consulting", "doc.title.insights": "Insights · BEA Consulting",
+      "nav.home": "Início",
+      "exp.eyebrow": "Saiba mais", "exp.t1": "Conheça a BEA", "exp.t2": "por dentro.",
+      "exp.lead": "Cada tema tem a sua página. Abra só o que lhe interessa.",
+      "exp.m.t": "8 etapas. Zero improvisos.", "exp.m.d": "Como trabalhamos e porque os nossos prazos terminam antes dos da AGT.", "exp.m.cta": "Ver o método",
+      "exp.n.t": "Três níveis de acompanhamento.", "exp.n.d": "Do controlo ao departamento financeiro externo. Cada nível inclui o anterior.", "exp.n.cta": "Ver os níveis",
+      "exp.f.t": "Faça as contas antes de decidir.", "exp.f.d": "6 simuladores gratuitos: VAL e TIR, margem, crédito, fluxo de caixa e mais.", "exp.f.cta": "Abrir as ferramentas",
+      "exp.i.t": "O que precisa de saber, sem rodeios.", "exp.i.d": "Notas práticas sobre fiscalidade e financiamento, e as perguntas frequentes.", "exp.i.cta": "Ler os insights",
       "skip": "Saltar para o conteúdo",
       "nav.label": "Principal", "nav.services": "Serviços", "nav.method": "Método", "nav.tiers": "Níveis",
       "nav.tools": "Ferramentas", "nav.insights": "Insights", "nav.contact": "Contacto", "nav.start": "Por onde começar",
@@ -98,7 +113,7 @@
       "ins.more": "Ver pontos-chave", "ins.talk": "Falar sobre isto",
       "faq.eyebrow": "Perguntas frequentes", "faq.title": "Antes de falar connosco",
       "ct.eyebrow": "Contacto", "ct.t1": "Fale com a",
-      "ct.lead": "Vai investir, pedir crédito ou organizar as finanças? Diga-nos o que precisa. Respondemos pelo WhatsApp.",
+      "ct.lead": "Peça o seu diagnóstico gratuito ou diga-nos o que precisa: investir, pedir crédito ou organizar as finanças. Respondemos pelo WhatsApp.",
       "ct.phone": "Telefone", "ct.how": "Como funciona",
       "ct.how1": "Envia-nos a sua mensagem pelo formulário ou pelo WhatsApp.",
       "ct.how2": "Fazemos o diagnóstico: conhecer a empresa, os riscos e as pendências.",
@@ -122,7 +137,16 @@
       "chart.months": "Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Out,Nov,Dez"
     },
     en: {
-      "doc.title": "BEA Consulting · Financial consulting in Angola",
+      "doc.title.home": "BEA Consulting · Financial consulting in Angola",
+      "doc.title.metodo": "Method · BEA Consulting", "doc.title.niveis": "Support levels · BEA Consulting",
+      "doc.title.ferramentas": "Tools · BEA Consulting", "doc.title.insights": "Insights · BEA Consulting",
+      "nav.home": "Home",
+      "exp.eyebrow": "Learn more", "exp.t1": "Get to know BEA", "exp.t2": "from the inside.",
+      "exp.lead": "Each topic has its own page. Open only what interests you.",
+      "exp.m.t": "8 steps. Zero improvising.", "exp.m.d": "How we work and why our deadlines end before AGT's.", "exp.m.cta": "See the method",
+      "exp.n.t": "Three support levels.", "exp.n.d": "From control to an outsourced finance department. Each level includes the previous.", "exp.n.cta": "See the levels",
+      "exp.f.t": "Run the numbers before you decide.", "exp.f.d": "6 free simulators: NPV and IRR, margin, loans, cash flow and more.", "exp.f.cta": "Open the tools",
+      "exp.i.t": "What you need to know, straight to the point.", "exp.i.d": "Practical notes on tax and financing, plus frequently asked questions.", "exp.i.cta": "Read the insights",
       "skip": "Skip to content",
       "nav.label": "Main", "nav.services": "Services", "nav.method": "Method", "nav.tiers": "Levels",
       "nav.tools": "Tools", "nav.insights": "Insights", "nav.contact": "Contact", "nav.start": "Where to start",
@@ -198,7 +222,7 @@
       "ins.more": "Key points", "ins.talk": "Talk about this",
       "faq.eyebrow": "FAQ", "faq.title": "Before you get in touch",
       "ct.eyebrow": "Contact", "ct.t1": "Talk to",
-      "ct.lead": "Planning to invest, apply for credit or get your finances in order? Tell us what you need. We reply on WhatsApp.",
+      "ct.lead": "Request your free diagnosis or tell us what you need: investing, applying for credit or getting your finances in order. We reply on WhatsApp.",
       "ct.phone": "Phone", "ct.how": "How it works",
       "ct.how1": "Send us your message through the form or WhatsApp.",
       "ct.how2": "We run the diagnosis: the company, its risks and its open issues.",
@@ -395,7 +419,8 @@
      4. RENDERERS
      --------------------------------------------------------- */
   function renderRouter() {
-    $("#routerGrid").innerHTML = ROUTES.map(function (r, i) {
+    var el = $("#routerGrid"); if (!el) return;
+    el.innerHTML = ROUTES.map(function (r, i) {
       return '<article class="card route reveal d' + (i % 3) + '">' +
         '<h3 class="route__q">' + esc(L(r.q)) + '</h3>' +
         '<p class="route__a">' + esc(L(r.a)) + '</p>' +
@@ -407,7 +432,8 @@
   }
 
   function renderPillars() {
-    $("#pillars").innerHTML = PILLARS.map(function (p, i) {
+    var el = $("#pillars"); if (!el) return;
+    el.innerHTML = PILLARS.map(function (p, i) {
       return '<article class="card pillar reveal d' + i + '" id="pilar-' + p.id + '">' +
         '<header class="pillar__head"><span class="pillar__range">' + p.range + '</span>' +
           '<h3 class="pillar__title">' + esc(L(p.t)) + '</h3><p class="pillar__tag">' + esc(L(p.tag)) + '</p></header>' +
@@ -441,39 +467,43 @@
   }
 
   function renderMethod() {
-    $("#methodList").innerHTML = METHOD.map(function (m, i) {
+    var el = $("#methodList"); if (!el) return;
+    el.innerHTML = METHOD.map(function (m, i) {
       return '<li class="method__item reveal"><span class="method__n">' + String(i + 1).padStart(2, "0") + '</span>' +
         '<div><h3>' + esc(L(m.t)) + '</h3><p>' + esc(L(m.d)) + '</p></div></li>';
     }).join("");
   }
 
   function renderTiers() {
-    $("#tiers").innerHTML = TIERS.map(function (tr, i) {
+    var el = $("#tiers"); if (!el) return;
+    el.innerHTML = TIERS.map(function (tr, i) {
       return '<article class="card tier reveal d' + i + (tr.top ? " tier--top" : "") + '">' +
         (tr.top ? '<span class="tier__flag">' + esc(t("tier.flag")) + '</span>' : "") +
         '<div class="tier__bar" aria-hidden="true"><i></i></div>' +
         '<h3 class="tier__name"><span class="tier__lvl">' + esc(L(tr.n)) + '</span>' + esc(L(tr.t)) + '</h3>' +
         '<p class="tier__d">' + esc(L(tr.d)) + '</p>' +
-        '<a href="#contacto" class="btn ' + (tr.top ? "btn--teal" : "btn--outline") + ' btn--sm" data-service="' + tr.id + '">' + esc(t("tier.cta")) + '</a>' +
+        '<a href="' + contactHref(tr.id) + '" class="btn ' + (tr.top ? "btn--teal" : "btn--outline") + ' btn--sm" data-service="' + tr.id + '">' + esc(t("tier.cta")) + '</a>' +
         '</article>';
     }).join("");
   }
 
   function renderInsights() {
-    $("#insightsGrid").innerHTML = INSIGHTS.map(function (p, i) {
+    var el = $("#insightsGrid"); if (!el) return;
+    el.innerHTML = INSIGHTS.map(function (p, i) {
       return '<article class="card post reveal d' + (i % 3) + '"><div class="post__bar" aria-hidden="true"></div>' +
         '<div class="post__top"><span class="post__cat">' + esc(L(p.cat)) + '</span>' +
           '<h3 class="post__t">' + esc(L(p.t)) + '</h3><p class="post__s">' + esc(L(p.s)) + '</p></div>' +
         '<details class="post__more"><summary>' + esc(t("ins.more")) + ' ' + ARROW + '</summary>' +
           '<ul class="checks">' + p.pts.map(function (x) { return "<li>" + esc(L(x)) + "</li>"; }).join("") + '</ul>' +
           '<p class="post__kicker">' + esc(L(p.k)) + '</p>' +
-          '<p style="margin-top:14px"><a href="#contacto" class="link" data-service="' + p.svc + '">' + esc(t("ins.talk")) + ' ' + ARROW + '</a></p>' +
+          '<p style="margin-top:14px"><a href="' + contactHref(p.svc) + '" class="link" data-service="' + p.svc + '">' + esc(t("ins.talk")) + ' ' + ARROW + '</a></p>' +
         '</details></article>';
     }).join("");
   }
 
   function renderFaq() {
-    $("#faqList").innerHTML = FAQ.map(function (f, i) {
+    var el = $("#faqList"); if (!el) return;
+    el.innerHTML = FAQ.map(function (f, i) {
       return '<div class="faq__item reveal">' +
         '<button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-a' + i + '"><span>' + esc(L(f.q)) + '</span><span class="svc__plus" aria-hidden="true"></span></button>' +
         '<div class="faq__a" id="faq-a' + i + '"><div><p>' + esc(L(f.a)) + '</p></div></div></div>';
@@ -543,6 +573,7 @@
     return '<span class="chg ' + cls + '">' + arrow + " " + (it.chg > 0 ? "+" : "-") + s + "</span>";
   }
   function renderTicker() {
+    if (!$("#ticker")) return;
     var one = (market.items || []).map(function (it) {
       var label = it.label ? (it.label[lang] || it.label.pt) : "";
       var val = (it.pre || "") + fmtNum(it.value, it.dec || 0) + (it.suf || "");
@@ -559,7 +590,7 @@
     }
   }
   function initMarket() {
-    if (!window.fetch) return;
+    if (!window.fetch || !$("#ticker")) return;
     fetch("assets/data/market.json", { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { if (j && Array.isArray(j.items) && j.items.length) { market = j; renderTicker(); } })
@@ -616,6 +647,7 @@
     $("#chartX").innerHTML = t("chart.months").split(",").map(function (x) { return "<span>" + x + "</span>"; }).join("");
   }
   function initChart() {
+    if (!$("#mainChart")) return;
     $$("#dashTabs .tab").forEach(function (tab) {
       tab.addEventListener("click", function () {
         $$("#dashTabs .tab").forEach(function (x) { x.classList.remove("is-active"); x.setAttribute("aria-selected", "false"); });
@@ -752,7 +784,8 @@
   function affix(code) { return code === "yr" ? t("sim.years") : code === "mo" ? t("sim.months") : code; }
 
   function renderSimMenu() {
-    $("#simMenu").innerHTML = Object.keys(SIMS).map(function (k) {
+    var el = $("#simMenu"); if (!el) return;
+    el.innerHTML = Object.keys(SIMS).map(function (k) {
       var on = k === currentSim;
       return '<button type="button" role="tab" aria-selected="' + on + '" data-sim="' + k + '" class="' + (on ? "is-active" : "") + '">' +
         '<span class="sim__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + SIM_ICON[k] + "</svg></span>" +
@@ -763,6 +796,7 @@
     });
   }
   function renderSimPanel() {
+    if (!$("#simPanel")) return;
     var sim = SIMS[currentSim], st = simState[currentSim] || (simState[currentSim] = {});
     $("#simPanel").innerHTML = "<h3>" + esc(ST()[currentSim][0]) + '</h3><p class="sim__desc">' + esc(ST()[currentSim][1]) + "</p>" +
       '<div class="sim__form">' + sim.fields.map(function (f) {
@@ -786,7 +820,7 @@
         return '<div class="sim__r"><small>' + esc(ST().r[r[0]]) + '</small><b class="' + r[2] + '">' + esc(r[1]) + "</b></div>";
       }).join("") +
         (res.verdict ? '<p class="sim__verdict ' + res.verdict[0] + '">' + esc(res.verdict[1]) + "</p>" : "") +
-        '<p class="sim__note"><span>' + esc(t("sim.calcNote")) + '</span><a href="#contacto" class="btn btn--amber" data-service="' + sim.svc + '">' + esc(ST().talk) + "</a></p>";
+        '<p class="sim__note"><span>' + esc(t("sim.calcNote")) + '</span><a href="' + contactHref(sim.svc) + '" class="btn btn--amber" data-service="' + sim.svc + '">' + esc(ST().talk) + "</a></p>";
     }
     inputs.forEach(function (i) { i.addEventListener("input", run); });
     run();
@@ -811,6 +845,7 @@
 
   function initContact() {
     var form = $("#contactForm"), msg = $("#formMsg");
+    if (!form) return;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var name = $("#fName").value.trim();
@@ -835,13 +870,18 @@
   function initRouting() {
     document.addEventListener("click", function (e) {
       var s = e.target.closest("[data-service]");
-      if (s) {
+      if (s && hasContact()) {
         preselect(s.getAttribute("data-service"));
         if (s.tagName === "BUTTON") { $("#contacto").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }); }
         focusName();
       }
       var o = e.target.closest("[data-open-service]");
-      if (o) { e.preventDefault(); openService(o.getAttribute("data-open-service")); }
+      if (o) {
+        e.preventDefault();
+        var id = o.getAttribute("data-open-service");
+        if ($("#pillars")) openService(id);
+        else window.location.href = "./?open=" + encodeURIComponent(id) + "#servicos";
+      }
     });
   }
 
@@ -849,6 +889,7 @@
      9. E-INVOICE COUNTDOWN (1 Jan 2027, 00:00 WAT = UTC+1)
      --------------------------------------------------------- */
   function initEinv() {
+    if (!$("#einvDays")) return;
     var target = Date.UTC(2026, 11, 31, 23, 0, 0);
     var days = Math.ceil((target - Date.now()) / 86400000);
     if (days > 0) {
@@ -866,7 +907,7 @@
      --------------------------------------------------------- */
   function applyI18n() {
     document.documentElement.lang = lang === "en" ? "en" : "pt";
-    document.title = t("doc.title");
+    document.title = t("doc.title." + PAGE);
     $$("[data-i18n]").forEach(function (el) { var v = I18N[lang][el.getAttribute("data-i18n")]; if (v != null) el.textContent = v; });
     $$("[data-i18n-ph]").forEach(function (el) { var v = I18N[lang][el.getAttribute("data-i18n-ph")]; if (v != null) el.setAttribute("placeholder", v); });
     $$("[data-i18n-aria]").forEach(function (el) { var v = I18N[lang][el.getAttribute("data-i18n-aria")]; if (v != null) el.setAttribute("aria-label", v); });
@@ -876,7 +917,7 @@
   function renderAll() {
     renderRouter(); renderPillars(); renderMethod(); renderTiers(); renderInsights(); renderFaq();
     renderSubjects(); renderTicker(); renderSimMenu(); renderSimPanel();
-    drawChart(currentSeries, false);
+    if ($("#chartLine")) drawChart(currentSeries, false);
   }
 
   /* ---------------------------------------------------------
@@ -925,7 +966,9 @@
     top.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); });
 
     if (!("IntersectionObserver" in window)) return;
-    var links = $$(".nav a"), map = {};
+    // Scroll-spy only for same-page anchors (home: Serviços, Contacto); sub-pages mark their link statically.
+    var links = $$(".nav a").filter(function (l) { return l.getAttribute("href").charAt(0) === "#"; }), map = {};
+    if (!links.length) return;
     links.forEach(function (l) { map[l.getAttribute("href").slice(1)] = l; });
     var obs = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
@@ -935,7 +978,8 @@
         }
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
-    Object.keys(map).forEach(function (id) { var s = document.getElementById(id); if (s) obs.observe(s); });
+    // Observe every section so the highlight clears outside Serviços/Contacto.
+    $$("main > section").forEach(function (s) { obs.observe(s); });
   }
 
   function initDrawer() {
@@ -984,8 +1028,34 @@
   /* ---------------------------------------------------------
      12. BOOT
      --------------------------------------------------------- */
+  /* Links to sections that moved to their own page (old single-page anchors) */
+  var OLD_ANCHORS = { metodo: "metodo.html", rigor: "metodo.html", niveis: "niveis.html", relatorio: "niveis.html",
+                      ferramentas: "ferramentas.html", insights: "insights.html", faq: "insights.html#faq", diagnostico: "#contacto" };
+  function redirectOldAnchor() {
+    if (PAGE !== "home") return false;
+    var h = location.hash.slice(1), dest = OLD_ANCHORS[h];
+    if (!dest || document.getElementById(h)) return false;
+    if (dest.charAt(0) === "#") { location.hash = dest; return false; }
+    location.replace(dest);
+    return true;
+  }
+  /* Arriving from a sub-page: ./?s=<subject>#contacto or ./?open=<service>#servicos */
+  function applyParams() {
+    if (!hasContact()) return;
+    var q = window.URLSearchParams ? new URLSearchParams(location.search) : null;
+    var s = q && q.get("s"), o = q && q.get("open");
+    if (s) preselect(s);
+    if (s || o) { try { history.replaceState(null, "", location.pathname + location.hash); } catch (e) { /* ignore */ } }
+    if (o) { setTimeout(function () { openService(o); }, 80); return; }
+    if (location.hash) {
+      var target = document.getElementById(location.hash.slice(1));
+      if (target) setTimeout(function () { target.scrollIntoView(); }, 60);
+    }
+  }
+
   function boot() {
     window.__bea = true;
+    if (redirectOldAnchor()) return;
     $("#year").textContent = new Date().getFullYear();
     initEinv();
     renderAll();
@@ -993,6 +1063,7 @@
     initTheme(); initLang(); initHeader(); initDrawer();
     initContact(); initRouting(); initChart();
     initReveal(); initCounters(); initHeroViz(); initMarket();
+    applyParams();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
