@@ -1,5 +1,5 @@
 /**
- * ANEVA — Recolha diária de indicadores de mercado
+ * BEA Consulting — Recolha diária de indicadores de mercado
  * ------------------------------------------------------------
  * Atualiza assets/data/market.json com:
  *   • Câmbio (USD/AOA, EUR/AOA, GBP/AOA, ZAR/AOA) — automático e fiável,
@@ -19,7 +19,7 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const FILE = new URL("../assets/data/market.json", import.meta.url);
 const UA =
-  "Mozilla/5.0 (compatible; AnevaMarketBot/1.0; +https://aneva.co.ao)";
+  "Mozilla/5.0 (compatible; BEAMarketBot/1.0)";
 // UA de navegador para fontes que rejeitam bots (ex.: Yahoo Finance)
 const UA_BROWSER =
   "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122 Safari/537.36";

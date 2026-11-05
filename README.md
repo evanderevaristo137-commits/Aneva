@@ -1,72 +1,77 @@
-# ANEVA · Inteligência Financeira
+# BEA Consulting · Website
 
-> **Onde a inteligência financeira encontra o crescimento empresarial.**
+> **Decida com números, não com palpites.**
 
-Website institucional premium da **ANEVA** — consultora de Finanças, Contabilidade,
-Fiscalidade, Auditoria, Consultoria Empresarial, Planeamento Financeiro e Gestão
-Estratégica, com sede em Angola e visão de expansão para toda a África.
+Website institucional da **BEA Consulting**, consultora financeira em Angola:
+contabilidade, fiscalidade, auditoria, gestão financeira, estudos de viabilidade
+e acesso ao crédito, para empresas e investidores.
 
-Posiciona a ANEVA como uma consultora financeira de referência, capaz de competir
-visualmente e estrategicamente com as maiores consultoras internacionais.
+## O que o site inclui
 
-## ✨ Destaques
+- **Por onde começar**: o cliente escolhe a sua situação (notificação da AGT,
+  pedido de crédito, investimento, perdas, contabilidade, factura electrónica) e
+  é levado directamente ao serviço certo e ao contacto, com o assunto já escolhido.
+- **12 serviços em 3 frentes** (Gestão Financeira · Análise & Financiamento ·
+  Fiscalidade, Auditoria & Sistemas), cada um com descrição e pedido de proposta.
+- **Porquê a BEA**: 15 verificações no fecho mensal, prazos antes dos da AGT,
+  "Submeter não é cumprir" e a rotina diária → trimestral.
+- **Método em 8 etapas** e **3 níveis de acompanhamento** (Controlo → Operação →
+  Departamento financeiro externo).
+- **Faixa da factura electrónica** com contagem decrescente até 1 de Janeiro de 2027.
+- **Diagnóstico gratuito** (ficha de diagnóstico, mapa de pendências, plano de trabalho).
+- **Simuladores**: VAL/TIR (viabilidade), margem de lucro, ponto de equilíbrio,
+  crédito bancário, fluxo de caixa e Imposto Industrial.
+- **Centro de Inteligência**: câmbio e commodities actualizados automaticamente
+  todos os dias úteis (`assets/data/market.json`).
+- **Contacto pelo WhatsApp**: o formulário abre o WhatsApp (936 673 669) com a
+  mensagem já escrita, sem precisar de servidor.
+- Português / English, modo claro / escuro, barra de acções rápidas no telemóvel,
+  acessibilidade (WCAG) e SEO com imagem de partilha.
 
-- **Design premium** — minimalista, corporativo e tecnológico. Paleta azul-profundo
-  (`#0B1F3A`), branco, cinza claro e dourado metálico discreto.
-- **Centro de Inteligência Financeira** — ticker com indicadores do mercado angolano
-  (câmbio, inflação, taxa diretora, LUIBOR, Brent, BODIVA — valores ilustrativos).
-- **Painel financeiro interativo** — gráficos de crescimento, fluxo de caixa e
-  rentabilidade desenhados em SVG, com gauge de saúde financeira e indicadores-chave.
-- **16 serviços** com ícones lineares exclusivos.
-- **Simuladores financeiros** funcionais: Margem de Lucro, Ponto de Equilíbrio,
-  Empréstimos, Fluxo de Caixa e Simulador Fiscal.
-- **Modo claro / escuro** com preferência persistida.
-- **Bilingue** — Português 🇦🇴 / English 🇬🇧, alternável em tempo real.
-- **Casos de sucesso, blog de insights, centro de recursos e FAQ.**
-- **Animações suaves** — scroll cinematográfico, contadores animados, microinterações.
-- **Acessibilidade (WCAG)** — skip link, foco visível, `prefers-reduced-motion`,
-  navegação por teclado e semântica correta.
-- **SEO avançado** — meta tags, Open Graph, dados estruturados JSON-LD, `sitemap.xml`
-  e `robots.txt`.
-- **Performance** — zero dependências externas, HTML/CSS/JS puro.
+## Identidade
 
-## 🗂 Estrutura
+Cores e tipo de letra retirados dos logos e publicações da BEA:
+
+| Token | Cor |
+|---|---|
+| Teal (logo) | `#176E74` |
+| Teal profundo | `#0F4F53` |
+| Âmbar | `#D4943A` |
+| Bronze (selo do logo) | `#B27409` |
+| Café (texto) | `#27231F` |
+| Creme (fundo) | `#F4EEE3` |
+| Taupe | `#5A534B` |
+
+Tipo de letra: **Poppins**, alojada no próprio site (`assets/fonts`, licença SIL OFL 1.1).
+
+## Estrutura
 
 ```
 .
-├── index.html            # Página única com todas as secções
+├── index.html               # Página
 ├── assets/
-│   ├── css/styles.css     # Design system e estilos
-│   ├── js/main.js         # i18n, gráficos, simuladores, interações
-│   └── img/favicon.svg    # Ícone da marca
-├── robots.txt
-├── sitemap.xml
-└── .nojekyll              # Publicação direta no GitHub Pages
+│   ├── css/styles.css       # Design system
+│   ├── js/main.js           # Conteúdo PT/EN, simuladores, interacções
+│   ├── data/market.json     # Indicadores de mercado (actualizado pelo bot)
+│   ├── fonts/               # Poppins (woff2) + licença OFL
+│   └── img/                 # Logos, favicon, imagem de partilha
+├── scripts/fetch-market.mjs # Recolha diária de câmbio e commodities
+└── .github/workflows/       # Deploy (GitHub Pages) e recolha de dados
 ```
 
-## 🚀 Como executar
-
-Não requer build nem dependências. Basta servir a pasta:
+## Executar localmente
 
 ```bash
-# opção 1 — abrir diretamente
-open index.html
-
-# opção 2 — servidor local
 python3 -m http.server 8000
-# aceder a http://localhost:8000
+# abrir http://localhost:8000
 ```
 
-### Publicar no GitHub Pages
-Ative o GitHub Pages sobre a branch e a raiz do repositório. O ficheiro `.nojekyll`
-garante que os assets são servidos tal como estão.
+## Editar conteúdos
 
-## 🎨 Personalização
+- **Textos e traduções**: objecto `I18N` e listas `PILLARS`, `ROUTES`, `METHOD`,
+  `TIERS`, `INSIGHTS` e `FAQ` em `assets/js/main.js`.
+- **WhatsApp**: constante `WA_NUMBER` em `assets/js/main.js` e links `wa.me` em `index.html`.
+- **Indicadores manuais** (inflação, taxa directora, LUIBOR, BODIVA): `assets/data/market.json`.
 
-- **Cores e tipografia:** tokens no topo de `assets/css/styles.css` (`:root`).
-- **Conteúdos e traduções:** objeto `I18N` em `assets/js/main.js`.
-- **Contactos / WhatsApp:** procurar `+244 900 000 000` e `geral@aneva.co.ao`.
-- **Indicadores do mercado:** função `renderTicker()` em `main.js`.
-
-> ⚠️ Números de estatísticas, casos e indicadores são **ilustrativos** e devem ser
-> substituídos pelos dados reais da ANEVA antes da publicação.
+> Os valores do gráfico "Relatório mensal de gestão" são ilustrativos e estão
+> assinalados como tal na página.
