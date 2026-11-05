@@ -37,7 +37,7 @@ jobs:
 
       - name: Fazer commit se houver alterações
         run: |
-          git config user.name "aneva-market-bot"
+          git config user.name "bea-market-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/data/market.json
           if git diff --cached --quiet; then

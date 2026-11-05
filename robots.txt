@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aneva.co.ao/sitemap.xml
+Sitemap: https://evanderevaristo137-commits.github.io/Aneva/sitemap.xml
