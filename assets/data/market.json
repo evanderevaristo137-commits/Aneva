@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T13:29:40.620Z",
+  "updatedAt": "2026-11-16T14:05:39.356Z",
   "items": [
     {
       "id": "usdaoa",
@@ -7,13 +7,13 @@
         "pt": "USD/AOA",
         "en": "USD/AOA"
       },
-      "value": 916.17,
+      "value": 921.31,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.17,
+      "chg": 0.56,
       "chgType": "pct",
-      "dir": "good",
+      "dir": "bad",
       "src": "auto"
     },
     {
@@ -22,13 +22,13 @@
         "pt": "EUR/AOA",
         "en": "EUR/AOA"
       },
-      "value": 1014.04,
+      "value": 1016.2,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.57,
+      "chg": 0.21,
       "chgType": "pct",
-      "dir": "good",
+      "dir": "bad",
       "src": "auto"
     },
     {
@@ -37,13 +37,13 @@
         "pt": "GBP/AOA",
         "en": "GBP/AOA"
       },
-      "value": 1213.23,
+      "value": 1217.75,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.53,
+      "chg": 0.37,
       "chgType": "pct",
-      "dir": "good",
+      "dir": "bad",
       "src": "auto"
     },
     {
@@ -52,11 +52,11 @@
         "pt": "ZAR/AOA",
         "en": "ZAR/AOA"
       },
-      "value": 54.74,
+      "value": 54.41,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -1.07,
+      "chg": -0.6,
       "chgType": "pct",
       "dir": "good",
       "src": "auto"
@@ -127,13 +127,13 @@
         "pt": "WTI",
         "en": "WTI"
       },
-      "value": 90.68,
+      "value": 87.68,
       "dec": 2,
       "pre": "USD ",
       "suf": "",
-      "chg": -5.99,
+      "chg": 1.33,
       "chgType": "pct",
-      "dir": "down",
+      "dir": "up",
       "src": "commodity"
     },
     {
@@ -184,7 +184,7 @@
   ],
   "log": [
     "câmbio: ok (API de mercado)",
-    "commodities: FALHOU — mantidos valores anteriores",
+    "commodities: 1/4 atualizadas (Yahoo)",
     "BNA: sem dados (definir BNA_URL) — valor manual mantido",
     "BODIVA: sem dados (definir BODIVA_URL) — valor manual mantido"
   ]
