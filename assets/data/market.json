@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T14:05:39.356Z",
+  "updatedAt": "2026-11-17T14:59:05.763Z",
   "items": [
     {
       "id": "usdaoa",
@@ -7,11 +7,11 @@
         "pt": "USD/AOA",
         "en": "USD/AOA"
       },
-      "value": 921.31,
+      "value": 929.77,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.56,
+      "chg": 0.92,
       "chgType": "pct",
       "dir": "bad",
       "src": "auto"
@@ -22,11 +22,11 @@
         "pt": "EUR/AOA",
         "en": "EUR/AOA"
       },
-      "value": 1016.2,
+      "value": 1023.32,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.21,
+      "chg": 0.7,
       "chgType": "pct",
       "dir": "bad",
       "src": "auto"
@@ -37,11 +37,11 @@
         "pt": "GBP/AOA",
         "en": "GBP/AOA"
       },
-      "value": 1217.75,
+      "value": 1226.2,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": 0.37,
+      "chg": 0.69,
       "chgType": "pct",
       "dir": "bad",
       "src": "auto"
@@ -52,13 +52,13 @@
         "pt": "ZAR/AOA",
         "en": "ZAR/AOA"
       },
-      "value": 54.41,
+      "value": 54.82,
       "dec": 2,
       "pre": "",
       "suf": "",
-      "chg": -0.6,
+      "chg": 0.75,
       "chgType": "pct",
-      "dir": "good",
+      "dir": "bad",
       "src": "auto"
     },
     {
@@ -184,7 +184,7 @@
   ],
   "log": [
     "câmbio: ok (API de mercado)",
-    "commodities: 1/4 atualizadas (Yahoo)",
+    "commodities: FALHOU — mantidos valores anteriores",
     "BNA: sem dados (definir BNA_URL) — valor manual mantido",
     "BODIVA: sem dados (definir BODIVA_URL) — valor manual mantido"
   ]
